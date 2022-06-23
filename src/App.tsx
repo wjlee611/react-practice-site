@@ -52,6 +52,8 @@ table {
 
 * {
   box-sizing: border-box;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 `;
 
