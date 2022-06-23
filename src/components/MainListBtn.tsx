@@ -10,34 +10,54 @@ const ButtomWrap = styled.div<{ isSelected: boolean }>`
   align-items: flex-end;
   position: relative;
   z-index: 2;
-  &:hover > div:first-child,
-  &:hover > div:last-child > div:first-child {
-    background-color: ${"#00000055"};
+  &:hover > div:first-child {
+    opacity: 1;
   }
-  transition: height 0.3s ease-in-out, background-color 0.3s ease-out;
+  transition: height 0.3s ease-in-out;
+  will-change: contents;
 `;
-const TitleWrap = styled.div<{ isSelected: boolean }>`
+const TitleGradBG = styled.div<{ isSelected: boolean }>`
+  width: 80%;
+  height: 40px;
+  margin-right: 70px;
+  position: absolute;
+  background: ${"linear-gradient(175deg, #00000000 20%, #00000055)"};
+  opacity: ${(props) => (props.isSelected ? 1 : 0)};
+  transition: opacity 0.2s ease-out;
+`;
+const TitleWrap = styled.div`
   width: 80%;
   height: 40px;
   margin-right: 70px;
   border-bottom: 3px solid white;
   display: flex;
   z-index: 2;
-  background-color: ${(props) =>
-    props.isSelected ? "#00000055" : "#00000000"};
-  transition: background-color 0.3s ease-out;
   position: relative;
 `;
 const TitleNo = styled.div`
+  height: 40px;
+  padding-bottom: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: white;
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+  & > span:first-child {
+    width: 100px;
+    position: absolute;
+    top: 5px;
+    left: -5px;
+  }
+`;
+const TitleName = styled.div`
   height: 40px;
   padding-bottom: 5px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   color: white;
-  position: absolute;
-`;
-const TitleName = styled(TitleNo)`
   width: 300px;
   align-items: center;
   position: absolute;
@@ -51,7 +71,7 @@ const ContentWrap = styled.div<{ isSelected: boolean }>`
   flex-direction: column;
   align-items: flex-end;
   border-left: 10px solid white;
-  transition: height 0.3s ease-in-out;
+  transition: height 0.3s cubic-bezier(0.6, 0, 0.4, 1);
   position: absolute;
   top: 37px;
   box-sizing: content-box;
@@ -69,7 +89,7 @@ const Content = styled.div<{ isSelected: boolean }>`
   justify-content: center;
   background-color: ${(props) =>
     props.isSelected ? "#00000055" : "#00000000"};
-  transition: background-color 0.3s ease-out;
+  transition: background-color 0.3s cubic-bezier(0.6, 0, 0.4, 1);
   color: white;
 `;
 
@@ -92,7 +112,8 @@ function MainListBtn({ index, proj }: IMainListBtn) {
       onBlur={onBlur}
       isSelected={isFocused}
     >
-      <TitleWrap isSelected={isFocused}>
+      <TitleGradBG isSelected={isFocused} />
+      <TitleWrap>
         <TitleNo>
           <span>Archive No.</span>
           <span>{(index + 1).toString().padStart(3, "0")}</span>

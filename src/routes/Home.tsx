@@ -12,15 +12,40 @@ const Background = styled.div`
   display: flex;
   position: relative;
 `;
+const FrontGradBG = styled.div`
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: absolute;
+  background: ${"linear-gradient(0deg, #000000ff 0%, #00000000 20% 92%, #000000ff 100%)"};
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 50px;
+  & > div {
+    width: 90%;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid white;
+    color: white;
+    font-size: 15px;
+    font-weight: 400;
+  }
+`;
 const InfoWrap = styled.div`
   width: 40%;
   height: 100vh;
-  background-color: ${"#00000055"};
+  background-color: ${"#00000044"};
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-left: 100px;
   color: white;
+  z-index: 1;
   & > img:first-child {
     width: 150px;
     height: 150px;
@@ -55,14 +80,16 @@ const ListWrap = styled.div`
   &::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
   }
-  background-color: ${"#00000055"};
+  background-color: ${"#00000044"};
+  z-index: 1;
 `;
 const BtnList = styled.ul`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100px 0;
+  padding-top: 100px;
+  padding-bottom: 200px;
 `;
 
 const projectList = [
@@ -73,6 +100,14 @@ const projectList = [
   { name: "5오", stacks: ["node.js"] },
   { name: "666666", stacks: ["Python"] },
   { name: "777ucky", stacks: ["React", "node.js"] },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"] },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"] },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"] },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"] },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"] },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"] },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"] },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"] },
 ];
 
 function Home() {
@@ -92,6 +127,12 @@ function Home() {
           ))}
         </BtnList>
       </ListWrap>
+      <FrontGradBG>
+        <div>
+          <span>ACCESSING...</span>
+          <span>PROJECTS ARCHIVE</span>
+        </div>
+      </FrontGradBG>
     </Background>
   );
 }
