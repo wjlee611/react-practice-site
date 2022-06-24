@@ -6,9 +6,9 @@ function Router() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/:project">
+        {/* <Route path="/:project">
           <Project />
-        </Route>
+        </Route> */}
         <Route path="/">
           <Home />
         </Route>
