@@ -21,7 +21,7 @@ const TitleGradBG = styled.div<{ isSelected: boolean }>`
   height: 40px;
   margin-right: 70px;
   position: absolute;
-  background: ${"linear-gradient(175deg, #00000000 20%, #00000055)"};
+  background: ${"linear-gradient(175deg, #00000000 20%, #00000099)"};
   opacity: ${(props) => (props.isSelected ? 1 : 0)};
   transition: opacity 0.2s ease-out;
 `;
@@ -71,9 +71,9 @@ const ContentWrap = styled.div<{ isSelected: boolean }>`
   flex-direction: column;
   align-items: flex-end;
   border-left: 10px solid white;
-  transition: height 0.3s cubic-bezier(0.6, 0, 0.4, 1);
+  transition: height 0.3s ease-in-out, top 0.3s ease-in-out;
   position: absolute;
-  top: 37px;
+  top: ${(props) => (props.isSelected ? "40px" : "37px")};
   box-sizing: content-box;
   z-index: 1;
 `;
@@ -82,7 +82,6 @@ const Content = styled.div<{ isSelected: boolean }>`
   height: 460px;
   margin-right: 70px;
   padding: 0 10px;
-  overflow: hidden;
   border-bottom: 3px solid white;
   display: flex;
   flex-direction: column;

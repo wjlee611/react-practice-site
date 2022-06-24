@@ -4,7 +4,11 @@ import bgImage from "../images/bg.png";
 import iconImage from "../images/prts.png";
 
 const Background = styled.div`
-  background-image: url(${bgImage});
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.6),
+      rgba(200, 200, 200, 0.3)
+    ),
+    url(${bgImage});
   background-size: cover;
   width: 100vw;
   height: 100vh;
@@ -39,7 +43,6 @@ const FrontGradBG = styled.div`
 const InfoWrap = styled.div`
   width: 40%;
   height: 100vh;
-  background-color: ${"#00000044"};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -56,10 +59,15 @@ const InfoWrap = styled.div`
     font-weight: 200;
     margin-left: 30px;
   }
-  & > h1:nth-child(3) {
+  & > div:nth-child(3) {
+    display: flex;
     font-size: 40px;
     font-weight: 700;
-    margin-left: 30px;
+    margin-left: 28px;
+    & > h1:last-child {
+      font-weight: 300;
+      margin-left: 10px;
+    }
   }
   & > span:nth-child(4) {
     font-size: 15px;
@@ -80,7 +88,6 @@ const ListWrap = styled.div`
   &::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
   }
-  background-color: ${"#00000044"};
   z-index: 1;
 `;
 const BtnList = styled.ul`
@@ -116,7 +123,10 @@ function Home() {
       <InfoWrap>
         <img src={iconImage} />
         <span>Accessing...</span>
-        <h1>Projects Archive</h1>
+        <div>
+          <h1>Projects</h1>
+          <h1> Archive_</h1>
+        </div>
         <span>Dev.</span>
         <h2>Woong</h2>
       </InfoWrap>
