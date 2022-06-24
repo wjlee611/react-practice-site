@@ -48,7 +48,7 @@ const ButtomWrap = styled.div<{
   margin: 10px 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   position: relative;
   z-index: 2;
   &:hover > div:first-child {
@@ -62,18 +62,18 @@ const ButtomWrap = styled.div<{
   animation-delay: ${(props) => props.index / 8 + "s"};
 `;
 const TitleGradBG = styled.div<{ isSelected: boolean }>`
-  width: 80%;
+  width: 85%;
   height: 40px;
-  margin-right: 70px;
+  margin-left: 60px;
   position: absolute;
   background: ${"linear-gradient(175deg, #00000000 20%, #00000099)"};
   opacity: ${(props) => (props.isSelected ? 1 : 0)};
   transition: opacity 0.2s ease-out;
 `;
 const TitleWrap = styled.div`
-  width: 80%;
+  width: 85%;
   height: 40px;
-  margin-right: 70px;
+  margin-left: 60px;
   border-bottom: 3px solid white;
   display: flex;
   z-index: 2;
@@ -103,7 +103,7 @@ const TitleName = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   color: white;
-  width: 300px;
+  width: 200px;
   align-items: center;
   position: absolute;
   right: 0;
@@ -114,7 +114,7 @@ const ContentWrap = styled.div<{ isSelected: boolean }>`
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   border-left: 10px solid white;
   transition: height 0.3s ease-in-out, top 0.3s ease-in-out;
   position: absolute;
@@ -123,9 +123,9 @@ const ContentWrap = styled.div<{ isSelected: boolean }>`
   z-index: 1;
 `;
 const Content = styled.div<{ isSelected: boolean }>`
-  width: 80%;
+  width: 85%;
   height: 463px;
-  margin-right: 70px;
+  margin-left: 50px;
   padding: 0 10px;
   border-bottom: 3px solid white;
   display: flex;

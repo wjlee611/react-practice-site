@@ -12,6 +12,7 @@ const Background = styled.div`
     ),
     url(${bgImage});
   background-size: cover;
+  background-position: center;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -108,6 +109,7 @@ const InfoWrap = styled.div<{ className: any; isLoading: boolean | "loading" }>`
 const ListWrap = styled.div`
   width: 60%;
   height: 100vh;
+  margin-right: 100px;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -120,7 +122,7 @@ const BtnList = styled.ul`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   padding-top: 100px;
   padding-bottom: 200px;
 `;
