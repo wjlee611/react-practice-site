@@ -36,6 +36,36 @@ const to_visible_blink = keyframes`
     opacity: 1;
   }
 `;
+const to_visible = keyframes`
+  from {
+    opacity: 0;
+  } to {
+    opacity: 1;
+  }
+`;
+const titleWrap_border = keyframes`
+  from {
+    width: 0%;
+  } to {
+    width: 85%;
+  }
+`;
+const titleNo = keyframes`
+  from {
+    opacity: 0;
+    left: -5%;
+  } to {
+    opacity: 1;
+    left: 0;
+  }
+`;
+const titleName = keyframes`
+  from {
+    right: 40%;
+  } to {
+    right: 0;
+  }
+`;
 
 const ButtomWrap = styled.div<{
   isSelected: boolean;
@@ -70,16 +100,19 @@ const TitleGradBG = styled.div<{ isSelected: boolean }>`
   opacity: ${(props) => (props.isSelected ? 1 : 0)};
   transition: opacity 0.2s ease-out;
 `;
-const TitleWrap = styled.div`
-  width: 85%;
+const TitleWrap = styled.div<{ index: number; isLoading: boolean | "loading" }>`
+  width: ${(props) => (props.isLoading === true ? "85%" : "0%")};
   height: 40px;
   margin-left: 60px;
   border-bottom: 3px solid white;
   display: flex;
   z-index: 2;
   position: relative;
+  animation: ${(props) => (props.isLoading === true ? null : titleWrap_border)}
+    1s cubic-bezier(0, 0.4, 0, 1) forwards;
+  animation-delay: ${(props) => props.index / 8 + "s"};
 `;
-const TitleNo = styled.div`
+const TitleNo = styled.div<{ index: number; isLoading: boolean | "loading" }>`
   height: 40px;
   padding-bottom: 2px;
   display: flex;
@@ -95,8 +128,12 @@ const TitleNo = styled.div`
     top: 5px;
     left: -5px;
   }
+  opacity: ${(props) => (props.isLoading === true ? 1 : 0)};
+  animation: ${(props) => (props.isLoading === true ? null : titleNo)} 0.5s
+    cubic-bezier(0, 0.4, 0, 1) forwards;
+  animation-delay: ${(props) => props.index / 8 + 0.5 + "s"};
 `;
-const TitleName = styled.div`
+const TitleName = styled.div<{ index: number; isLoading: boolean | "loading" }>`
   height: 40px;
   padding-bottom: 5px;
   display: flex;
@@ -107,6 +144,12 @@ const TitleName = styled.div`
   align-items: center;
   position: absolute;
   right: 0;
+  opacity: ${(props) => (props.isLoading === true ? 1 : 0)};
+  animation: ${(props) => (props.isLoading === true ? null : titleName)} 0.7s
+      cubic-bezier(1, 0, 0.3, 1) forwards,
+    ${(props) => (props.isLoading === true ? null : to_visible)} 0.2s
+      ease-in-out forwards;
+  animation-delay: ${(props) => props.index / 8 + 0.7 + "s"};
 `;
 const ContentWrap = styled.div<{ isSelected: boolean }>`
   width: 100%;
@@ -118,7 +161,7 @@ const ContentWrap = styled.div<{ isSelected: boolean }>`
   border-left: 10px solid white;
   transition: height 0.3s ease-in-out, top 0.3s ease-in-out;
   position: absolute;
-  top: ${(props) => (props.isSelected ? "37px" : "37px")};
+  top: 37px;
   box-sizing: content-box;
   z-index: 1;
 `;
@@ -160,12 +203,12 @@ function MainListBtn({ index, proj, isLoading }: IMainListBtn) {
       isLoading={isLoading}
     >
       <TitleGradBG isSelected={isFocused} />
-      <TitleWrap>
-        <TitleNo>
+      <TitleWrap index={index} isLoading={isLoading}>
+        <TitleNo index={index} isLoading={isLoading}>
           <span>Archive No.</span>
           <span>{(index + 1).toString().padStart(3, "0")}</span>
         </TitleNo>
-        <TitleName>
+        <TitleName index={index} isLoading={isLoading}>
           <span>[{proj.name}]</span>
           <span>{proj.stacks.map((stack) => stack + " ")}</span>
         </TitleName>

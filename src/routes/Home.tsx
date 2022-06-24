@@ -159,7 +159,7 @@ function Home() {
     setIsLoading("loading");
     setTimeout(() => {
       setIsLoading(true);
-    }, 3000);
+    }, 3500); // ani play time(ms)
   };
 
   return (
