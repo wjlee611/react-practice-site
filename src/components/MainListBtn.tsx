@@ -1,8 +1,49 @@
 import { useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
-const ButtomWrap = styled.div<{ isSelected: boolean }>`
+const to_visible_blink = keyframes`
+  0% {
+    opacity: 0;
+  }
+  19%{
+    opacity: 0;
+  }
+  20%{
+    opacity: 1;
+  }
+  39%{
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+  59%{
+    opacity: 0;
+  }
+   60% {
+    opacity: 1;
+  } 
+  79%{
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  } 
+  99%{
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+const ButtomWrap = styled.div<{
+  isSelected: boolean;
+  index: number;
+  isLoading: boolean | "loading";
+}>`
   width: 90%;
+  max-width: 800px;
   height: ${(props) => (props.isSelected ? "500px" : "40px")};
   margin: 10px 0;
   display: flex;
@@ -15,6 +56,10 @@ const ButtomWrap = styled.div<{ isSelected: boolean }>`
   }
   transition: height 0.3s ease-in-out;
   will-change: contents;
+  opacity: ${(props) => (props.isLoading === true ? 1 : 0)};
+  animation: ${(props) => (props.isLoading === true ? null : to_visible_blink)}
+    0.2s ease-in-out forwards;
+  animation-delay: ${(props) => props.index / 8 + "s"};
 `;
 const TitleGradBG = styled.div<{ isSelected: boolean }>`
   width: 80%;
@@ -65,7 +110,7 @@ const TitleName = styled.div`
 `;
 const ContentWrap = styled.div<{ isSelected: boolean }>`
   width: 100%;
-  height: ${(props) => (props.isSelected ? "460px" : "3px")};
+  height: ${(props) => (props.isSelected ? "463px" : "3px")};
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -73,13 +118,13 @@ const ContentWrap = styled.div<{ isSelected: boolean }>`
   border-left: 10px solid white;
   transition: height 0.3s ease-in-out, top 0.3s ease-in-out;
   position: absolute;
-  top: ${(props) => (props.isSelected ? "40px" : "37px")};
+  top: ${(props) => (props.isSelected ? "37px" : "37px")};
   box-sizing: content-box;
   z-index: 1;
 `;
 const Content = styled.div<{ isSelected: boolean }>`
   width: 80%;
-  height: 460px;
+  height: 463px;
   margin-right: 70px;
   padding: 0 10px;
   border-bottom: 3px solid white;
@@ -95,8 +140,9 @@ const Content = styled.div<{ isSelected: boolean }>`
 interface IMainListBtn {
   index: number;
   proj: { name: string; stacks: string[] };
+  isLoading: boolean | "loading";
 }
-function MainListBtn({ index, proj }: IMainListBtn) {
+function MainListBtn({ index, proj, isLoading }: IMainListBtn) {
   const [isFocused, setIsFocused] = useState(false);
   const onFocus = () => {
     setIsFocused(true);
@@ -110,6 +156,8 @@ function MainListBtn({ index, proj }: IMainListBtn) {
       onFocus={onFocus}
       onBlur={onBlur}
       isSelected={isFocused}
+      index={index}
+      isLoading={isLoading}
     >
       <TitleGradBG isSelected={isFocused} />
       <TitleWrap>

@@ -1,7 +1,9 @@
+import { useState } from "react";
 import styled from "styled-components";
 import MainListBtn from "../components/MainListBtn";
 import bgImage from "../images/bg.png";
 import iconImage from "../images/prts.png";
+import styles from "../css/Home.module.css";
 
 const Background = styled.div`
   background-image: linear-gradient(
@@ -14,9 +16,10 @@ const Background = styled.div`
   height: 100vh;
   overflow: hidden;
   display: flex;
+  align-items: center;
   position: relative;
 `;
-const FrontGradBG = styled.div`
+const FrontGradBG = styled.div<{ className: any }>`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -40,43 +43,66 @@ const FrontGradBG = styled.div`
     font-weight: 400;
   }
 `;
-const InfoWrap = styled.div`
+const InfoWrap = styled.div<{ className: any; isLoading: boolean | "loading" }>`
   width: 40%;
-  height: 100vh;
+  height: ${(props) => (props.isLoading === true ? "300px" : "100px")};
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-left: 100px;
   color: white;
   z-index: 1;
+  position: relative;
+  & > * {
+    position: absolute;
+    left: 100px;
+  }
+  //logo
   & > img:first-child {
     width: 150px;
     height: 150px;
     margin-bottom: 20px;
+    top: 0;
   }
+  //Accessing...
   & > span:nth-child(2) {
     font-size: 20px;
     font-weight: 200;
     margin-left: 30px;
+    top: 160px;
   }
+  //Projects Archive
   & > div:nth-child(3) {
     display: flex;
     font-size: 40px;
     font-weight: 700;
     margin-left: 28px;
+    top: 180px;
     & > h1:last-child {
       font-weight: 300;
       margin-left: 10px;
     }
   }
+  //Dev.
   & > span:nth-child(4) {
     font-size: 15px;
     font-weight: 200;
     margin-left: 30px;
+    top: 220px;
   }
+  //Woong
   & > h2:nth-child(5) {
     font-size: 25px;
     margin-left: 30px;
+    top: 235px;
+  }
+  //_
+  & > span:nth-child(6) {
+    font-size: 40px;
+    font-weight: 300;
+    margin-left: 30px;
+    top: 177px;
+    left: 375px;
   }
 `;
 const ListWrap = styled.div`
@@ -99,6 +125,14 @@ const BtnList = styled.ul`
   padding-bottom: 200px;
 `;
 
+//For testing loading animation
+const LoadBtn = styled.button`
+  position: absolute;
+  top: 100px;
+  left: 50px;
+  z-index: 3;
+`;
+
 const projectList = [
   { name: "프로젝트1", stacks: ["HTML", "CSS"] },
   { name: "콩콩", stacks: ["Python"] },
@@ -118,26 +152,66 @@ const projectList = [
 ];
 
 function Home() {
+  const [isLoading, setIsLoading] = useState<boolean | "loading">(false);
+  const onClick = () => {
+    setIsLoading("loading");
+    setTimeout(() => {
+      setIsLoading(true);
+    }, 3000);
+  };
+
   return (
     <Background>
-      <InfoWrap>
+      <LoadBtn onClick={onClick}>
+        {isLoading === true
+          ? "true"
+          : isLoading === "loading"
+          ? isLoading
+          : "false"}
+      </LoadBtn>
+      <InfoWrap
+        className={
+          isLoading === true
+            ? null
+            : isLoading === "loading"
+            ? styles.infoWrap_loading
+            : styles.invisible
+        }
+        isLoading={isLoading}
+      >
         <img src={iconImage} />
         <span>Accessing...</span>
         <div>
           <h1>Projects</h1>
-          <h1> Archive_</h1>
+          <h1> Archive</h1>
         </div>
         <span>Dev.</span>
         <h2>Woong</h2>
+        <span>_</span>
       </InfoWrap>
       <ListWrap>
         <BtnList>
-          {projectList.map((item, index) => (
-            <MainListBtn key={index} index={index} proj={item} />
-          ))}
+          {isLoading === false
+            ? null
+            : projectList.map((item, index) => (
+                <MainListBtn
+                  key={index}
+                  index={index}
+                  proj={item}
+                  isLoading={isLoading}
+                />
+              ))}
         </BtnList>
       </ListWrap>
-      <FrontGradBG>
+      <FrontGradBG
+        className={
+          isLoading === true
+            ? null
+            : isLoading === "loading"
+            ? styles.frontGradBG_loading
+            : styles.invisible
+        }
+      >
         <div>
           <span>ACCESSING...</span>
           <span>PROJECTS ARCHIVE</span>
