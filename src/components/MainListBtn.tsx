@@ -92,7 +92,6 @@ const ButtomWrap = styled.div<{
     opacity: 1;
   }
   transition: height 0.3s ease-in-out;
-  will-change: contents;
   opacity: ${(props) => (props.isLoading === true ? 1 : 0)};
   animation: ${(props) => (props.isLoading === true ? null : to_visible_blink)}
     0.2s ease-in-out forwards;
@@ -113,6 +112,7 @@ const TitleGradBG = styled.div<{
   animation: ${(props) => (props.isLoading === true ? null : titleWrap_border)}
     1s cubic-bezier(0, 0.4, 0, 1) forwards;
   animation-delay: ${(props) => props.index / 8 + "s"};
+  will-change: width;
 `;
 const TitleWrap = styled.div<{ index: number; isLoading: boolean | "loading" }>`
   width: ${(props) => (props.isLoading === true ? "85%" : "0%")};
@@ -125,6 +125,7 @@ const TitleWrap = styled.div<{ index: number; isLoading: boolean | "loading" }>`
   animation: ${(props) => (props.isLoading === true ? null : titleWrap_border)}
     1s cubic-bezier(0, 0.4, 0, 1) forwards;
   animation-delay: ${(props) => props.index / 8 + "s"};
+  will-change: width;
 `;
 const TitleNo = styled.div<{ index: number; isLoading: boolean | "loading" }>`
   height: 40px;
@@ -148,6 +149,7 @@ const TitleNo = styled.div<{ index: number; isLoading: boolean | "loading" }>`
   animation: ${(props) => (props.isLoading === true ? null : titleNo)} 0.5s
     cubic-bezier(0, 0.4, 0, 1) forwards;
   animation-delay: ${(props) => props.index / 8 + 0.5 + "s"};
+  will-change: left;
 `;
 const TitleName = styled.div<{ index: number; isLoading: boolean | "loading" }>`
   height: 40px;
@@ -171,6 +173,7 @@ const TitleName = styled.div<{ index: number; isLoading: boolean | "loading" }>`
     ${(props) => (props.isLoading === true ? null : to_visible)} 0.2s
       ease-in-out forwards;
   animation-delay: ${(props) => props.index / 8 + 0.7 + "s"};
+  will-change: right;
 `;
 const TitleIcon = styled.div<{ index: number; isLoading: boolean | "loading" }>`
   width: 20px;
@@ -188,6 +191,7 @@ const TitleIcon = styled.div<{ index: number; isLoading: boolean | "loading" }>`
     ${(props) => (props.isLoading === true ? null : to_visible)} 0.5s
       ease-in-out forwards;
   animation-delay: ${(props) => props.index / 8 + 1 + "s"};
+  will-change: right;
 `;
 const ContentWrap = styled.div<{ isSelected: boolean }>`
   width: 100%;
@@ -202,6 +206,7 @@ const ContentWrap = styled.div<{ isSelected: boolean }>`
   top: 37px;
   box-sizing: content-box;
   z-index: 1;
+  will-change: height;
 `;
 const Content = styled.div<{ isSelected: boolean }>`
   width: 85%;
@@ -255,7 +260,9 @@ function MainListBtn({ index, proj, isLoading }: IMainListBtn) {
         <span>{proj.position.slice(0, 1).toUpperCase()}</span>
       </TitleIcon>
       <ContentWrap isSelected={isFocused}>
-        <Content isSelected={isFocused}>Contents</Content>
+        <Content isSelected={isFocused}>
+          <span>contents</span>
+        </Content>
       </ContentWrap>
     </ButtomWrap>
   );

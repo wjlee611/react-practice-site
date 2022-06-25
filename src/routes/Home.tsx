@@ -1,9 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
 import MainListBtn from "../components/MainListBtn";
+import styles from "../css/Home.module.css";
+import { Helmet } from "react-helmet";
+// Image assets
 import bgImage from "../images/bg.png";
 import iconImage from "../images/prts.png";
-import styles from "../css/Home.module.css";
 
 const Background = styled.div`
   background-image: linear-gradient(
@@ -103,6 +105,7 @@ const ListWrap = styled.div`
   width: 60%;
   height: 100vh;
   margin-right: 100px;
+  overflow: hidden;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -157,6 +160,9 @@ function Home() {
 
   return (
     <Background>
+      <Helmet>
+        <title>dev.Woong</title>
+      </Helmet>
       <LoadBtn
         onClick={onClick}
         disabled={isLoading === "loading" ? true : false}
