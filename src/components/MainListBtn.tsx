@@ -66,6 +66,13 @@ const titleName = keyframes`
     right: 0;
   }
 `;
+const titleIcon = keyframes`
+  from {
+    right: 30%;
+  } to {
+    right: 0;
+  }
+`;
 
 const ButtomWrap = styled.div<{
   isSelected: boolean;
@@ -91,14 +98,21 @@ const ButtomWrap = styled.div<{
     0.2s ease-in-out forwards;
   animation-delay: ${(props) => props.index / 8 + "s"};
 `;
-const TitleGradBG = styled.div<{ isSelected: boolean }>`
-  width: 85%;
+const TitleGradBG = styled.div<{
+  isSelected: boolean;
+  index: number;
+  isLoading: boolean | "loading";
+}>`
+  width: ${(props) => (props.isLoading === true ? "85%" : "0%")};
   height: 40px;
   margin-left: 60px;
   position: absolute;
   background: ${"linear-gradient(175deg, #00000000 20%, #00000099)"};
   opacity: ${(props) => (props.isSelected ? 1 : 0)};
   transition: opacity 0.2s ease-out;
+  animation: ${(props) => (props.isLoading === true ? null : titleWrap_border)}
+    1s cubic-bezier(0, 0.4, 0, 1) forwards;
+  animation-delay: ${(props) => props.index / 8 + "s"};
 `;
 const TitleWrap = styled.div<{ index: number; isLoading: boolean | "loading" }>`
   width: ${(props) => (props.isLoading === true ? "85%" : "0%")};
@@ -121,12 +135,14 @@ const TitleNo = styled.div<{ index: number; isLoading: boolean | "loading" }>`
   color: white;
   position: absolute;
   left: 0;
+  top: -2px;
   font-weight: 700;
   & > span:first-child {
     width: 100px;
     position: absolute;
     top: 5px;
     left: -5px;
+    font-weight: 400;
   }
   opacity: ${(props) => (props.isLoading === true ? 1 : 0)};
   animation: ${(props) => (props.isLoading === true ? null : titleNo)} 0.5s
@@ -144,12 +160,34 @@ const TitleName = styled.div<{ index: number; isLoading: boolean | "loading" }>`
   align-items: center;
   position: absolute;
   right: 0;
+  font-weight: 400;
+  & > span:first-child {
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
   opacity: ${(props) => (props.isLoading === true ? 1 : 0)};
   animation: ${(props) => (props.isLoading === true ? null : titleName)} 0.7s
       cubic-bezier(1, 0, 0.3, 1) forwards,
     ${(props) => (props.isLoading === true ? null : to_visible)} 0.2s
       ease-in-out forwards;
   animation-delay: ${(props) => props.index / 8 + 0.7 + "s"};
+`;
+const TitleIcon = styled.div<{ index: number; isLoading: boolean | "loading" }>`
+  width: 20px;
+  color: white;
+  position: absolute;
+  font-size: 30px;
+  font-weight: 700;
+  display: flex;
+  align-items: flex-start;
+  top: 5px;
+  right: 0;
+  opacity: ${(props) => (props.isLoading === true ? 1 : 0)};
+  animation: ${(props) => (props.isLoading === true ? null : titleIcon)} 1s
+      cubic-bezier(0, 0.4, 0, 1) forwards,
+    ${(props) => (props.isLoading === true ? null : to_visible)} 0.5s
+      ease-in-out forwards;
+  animation-delay: ${(props) => props.index / 8 + 1 + "s"};
 `;
 const ContentWrap = styled.div<{ isSelected: boolean }>`
   width: 100%;
@@ -182,7 +220,7 @@ const Content = styled.div<{ isSelected: boolean }>`
 
 interface IMainListBtn {
   index: number;
-  proj: { name: string; stacks: string[] };
+  proj: { name: string; stacks: string[]; position: string };
   isLoading: boolean | "loading";
 }
 function MainListBtn({ index, proj, isLoading }: IMainListBtn) {
@@ -202,17 +240,20 @@ function MainListBtn({ index, proj, isLoading }: IMainListBtn) {
       index={index}
       isLoading={isLoading}
     >
-      <TitleGradBG isSelected={isFocused} />
+      <TitleGradBG isSelected={isFocused} index={index} isLoading={isLoading} />
       <TitleWrap index={index} isLoading={isLoading}>
         <TitleNo index={index} isLoading={isLoading}>
           <span>Archive No.</span>
           <span>{(index + 1).toString().padStart(3, "0")}</span>
         </TitleNo>
         <TitleName index={index} isLoading={isLoading}>
-          <span>[{proj.name}]</span>
+          <span>/ {proj.name} /</span>
           <span>{proj.stacks.map((stack) => stack + " ")}</span>
         </TitleName>
       </TitleWrap>
+      <TitleIcon index={index} isLoading={isLoading}>
+        <span>{proj.position.slice(0, 1).toUpperCase()}</span>
+      </TitleIcon>
       <ContentWrap isSelected={isFocused}>
         <Content isSelected={isFocused}>Contents</Content>
       </ContentWrap>

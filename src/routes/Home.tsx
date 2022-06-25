@@ -68,7 +68,7 @@ const InfoWrap = styled.div<{ className: any; isLoading: boolean | "loading" }>`
   //Accessing...
   & > span:nth-child(2) {
     font-size: 20px;
-    font-weight: 200;
+    font-weight: 400;
     margin-left: 30px;
     top: 160px;
   }
@@ -80,30 +80,23 @@ const InfoWrap = styled.div<{ className: any; isLoading: boolean | "loading" }>`
     margin-left: 28px;
     top: 180px;
     & > h1:last-child {
-      font-weight: 300;
+      font-weight: 400;
       margin-left: 10px;
     }
   }
   //Dev.
   & > span:nth-child(4) {
     font-size: 15px;
-    font-weight: 200;
+    font-weight: 400;
     margin-left: 30px;
     top: 220px;
   }
   //Woong
   & > h2:nth-child(5) {
     font-size: 25px;
+    font-weight: 700;
     margin-left: 30px;
     top: 235px;
-  }
-  //_
-  & > span:nth-child(6) {
-    font-size: 40px;
-    font-weight: 300;
-    margin-left: 30px;
-    top: 177px;
-    left: 375px;
   }
 `;
 const ListWrap = styled.div`
@@ -136,21 +129,21 @@ const LoadBtn = styled.button`
 `;
 
 const projectList = [
-  { name: "프로젝트1", stacks: ["HTML", "CSS"] },
-  { name: "콩콩", stacks: ["Python"] },
-  { name: "no.3", stacks: ["HTML", "CSS", "Javascript"] },
-  { name: "project 4", stacks: ["React"] },
-  { name: "5오", stacks: ["node.js"] },
-  { name: "666666", stacks: ["Python"] },
-  { name: "777ucky", stacks: ["React", "node.js"] },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"] },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"] },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"] },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"] },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"] },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"] },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"] },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"] },
+  { name: "프로젝트1", stacks: ["HTML", "CSS"], position: "front" },
+  { name: "콩콩", stacks: ["Python"], position: "back" },
+  { name: "no.3", stacks: ["HTML", "CSS", "Javascript"], position: "front" },
+  { name: "project 4", stacks: ["React"], position: "front" },
+  { name: "5오", stacks: ["node.js"], position: "back" },
+  { name: "666666", stacks: ["Python"], position: "back" },
+  { name: "777ucky", stacks: ["React", "node.js"], position: "all" },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "front" },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "back" },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "front" },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "all" },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "back" },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "front" },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "back" },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "all" },
 ];
 
 function Home() {
@@ -164,12 +157,15 @@ function Home() {
 
   return (
     <Background>
-      <LoadBtn onClick={onClick}>
+      <LoadBtn
+        onClick={onClick}
+        disabled={isLoading === "loading" ? true : false}
+      >
         {isLoading === true
-          ? "true"
+          ? "status: loaded"
           : isLoading === "loading"
-          ? isLoading
-          : "false"}
+          ? "status: load, play ani"
+          : "status: loading"}
       </LoadBtn>
       <InfoWrap
         className={
@@ -189,7 +185,6 @@ function Home() {
         </div>
         <span>Dev.</span>
         <h2>Woong</h2>
-        <span>_</span>
       </InfoWrap>
       <ListWrap>
         <BtnList>

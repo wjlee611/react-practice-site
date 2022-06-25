@@ -90,11 +90,6 @@
     to_visible 0.5s ease-in-out forwards;
   animation-delay: 2s;
 }
-.infoWrap_loading > span:nth-child(6) {
-  opacity: 0;
-  animation: to_visible 0.5s ease-in-out forwards;
-  animation-delay: 1s;
-}
 
 .frontGradBG_loading {
   opacity: 0;
