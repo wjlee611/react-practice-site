@@ -1,5 +1,11 @@
+import { useParams } from "react-router-dom";
+
+interface RouteParams {
+  project: string;
+}
 function Project() {
-  return <h1>Project</h1>;
+  const { project } = useParams<RouteParams>();
+  return <h1>Project: {project}</h1>;
 }
 
 export default Project;

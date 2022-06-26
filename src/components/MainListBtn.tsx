@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import frontIcon from "../images/front.svg";
 import backIcon from "../images/back.svg";
 import fullIcon from "../images/full.svg";
+import { Link } from "react-router-dom";
 
 const to_visible_blink = keyframes`
   0% {
@@ -50,7 +51,7 @@ const titleWrap_border = keyframes`
   from {
     width: 0%;
   } to {
-    width: 85%;
+    width: 80%;
   }
 `;
 const titleNo = keyframes`
@@ -75,15 +76,18 @@ const titleIcon = keyframes`
   }
 `;
 
-const ButtomWrap = styled.div<{
+const ButtomWrap = styled.button<{
   isSelected: boolean;
   index: number;
   isLoading: boolean | "loading";
 }>`
-  width: 90%;
+  width: 100%;
   max-width: 800px;
   height: ${(props) => (props.isSelected ? "500px" : "40px")};
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
   margin: 10px 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -103,9 +107,9 @@ const TitleGradBG = styled.div<{
   index: number;
   isLoading: boolean | "loading";
 }>`
-  width: ${(props) => (props.isLoading === true ? "85%" : "0%")};
+  width: ${(props) => (props.isLoading === true ? "80%" : "0%")};
   height: 40px;
-  margin-left: 60px;
+  margin-left: 100px;
   position: absolute;
   background: ${"linear-gradient(175deg, #00000000 20%, #00000099)"};
   opacity: ${(props) => (props.isSelected ? 1 : 0)};
@@ -116,33 +120,35 @@ const TitleGradBG = styled.div<{
   will-change: width;
 `;
 const TitleWrap = styled.div<{ index: number; isLoading: boolean | "loading" }>`
-  width: ${(props) => (props.isLoading === true ? "85%" : "0%")};
+  width: ${(props) => (props.isLoading === true ? "80%" : "0%")};
   height: 40px;
-  margin-left: 60px;
+  margin-left: 100px;
   border-bottom: 3px solid white;
   display: flex;
   z-index: 2;
-  position: relative;
+  position: absolute;
   animation: ${(props) => (props.isLoading === true ? null : titleWrap_border)}
     1s cubic-bezier(0, 0.4, 0, 1) forwards;
   animation-delay: ${(props) => props.index / 8 + "s"};
   will-change: width;
 `;
 const TitleNo = styled.div<{ index: number; isLoading: boolean | "loading" }>`
+  width: 100px;
   height: 40px;
   padding-bottom: 2px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  align-items: flex-start;
   color: white;
   position: absolute;
   left: 0;
-  top: -2px;
+  top: 0px;
+  font-size: 15px;
   font-weight: 700;
   & > span:first-child {
-    width: 100px;
     position: absolute;
-    top: 5px;
+    top: 3px;
     left: -5px;
     font-weight: 400;
   }
@@ -166,9 +172,12 @@ const TitleName = styled.div<{ index: number; isLoading: boolean | "loading" }>`
   position: absolute;
   right: 0;
   font-weight: 400;
-  & > span:first-child {
+  & > div:first-child {
     font-weight: 700;
-    margin-bottom: 2px;
+    & > span:first-child,
+    & > span:last-child {
+      color: ${"#00FFAB"};
+    }
   }
   opacity: ${(props) => (props.isLoading === true ? 1 : 0)};
   animation: ${(props) => (props.isLoading === true ? null : titleName)} 0.7s
@@ -206,6 +215,7 @@ const ContentWrap = styled.div<{ isSelected: boolean }>`
   flex-direction: column;
   align-items: flex-start;
   border-left: 10px solid white;
+  margin-left: 30px;
   transition: height 0.3s ease-in-out, top 0.3s ease-in-out;
   position: absolute;
   top: 37px;
@@ -214,10 +224,9 @@ const ContentWrap = styled.div<{ isSelected: boolean }>`
   will-change: scroll-position, height;
 `;
 const Content = styled.div`
-  width: 85%;
+  width: 80%;
   height: 463px;
-  margin-left: 50px;
-  padding: 0 10px;
+  margin-left: 60px;
   border-bottom: 3px solid white;
   display: flex;
   flex-direction: column;
@@ -233,30 +242,33 @@ interface IMainListBtn {
   isLoading: boolean | "loading";
 }
 function MainListBtn({ index, proj, isLoading }: IMainListBtn) {
-  const [isFocused, setIsFocused] = useState(false);
-  const onFocus = () => {
-    setIsFocused(true);
-  };
-  const onBlur = () => {
-    setIsFocused(false);
+  const [isSelected, setIsSelected] = useState(false);
+  const onClick = () => {
+    setIsSelected((prev) => !prev);
   };
   return (
     <ButtomWrap
-      tabIndex={index}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      isSelected={isFocused}
+      isSelected={isSelected}
       index={index}
       isLoading={isLoading}
+      onClick={onClick}
     >
-      <TitleGradBG isSelected={isFocused} index={index} isLoading={isLoading} />
+      <TitleGradBG
+        isSelected={isSelected}
+        index={index}
+        isLoading={isLoading}
+      />
       <TitleWrap index={index} isLoading={isLoading}>
         <TitleNo index={index} isLoading={isLoading}>
           <span>Archive No.</span>
           <span>{(index + 1).toString().padStart(3, "0")}</span>
         </TitleNo>
         <TitleName index={index} isLoading={isLoading}>
-          <span>/ {proj.name} /</span>
+          <div>
+            <span>/ </span>
+            <span>{proj.name}</span>
+            <span> /</span>
+          </div>
           <span>{proj.stacks.map((stack) => stack + " ")}</span>
         </TitleName>
       </TitleWrap>
@@ -272,9 +284,12 @@ function MainListBtn({ index, proj, isLoading }: IMainListBtn) {
           alt="f/b/fIcon"
         />
       </TitleIcon>
-      <ContentWrap isSelected={isFocused}>
+      <ContentWrap isSelected={isSelected}>
         <Content>
           <span>contents</span>
+          <Link to={{ pathname: `/portfolio-site/${(index + 1).toString()}` }}>
+            click
+          </Link>
         </Content>
       </ContentWrap>
     </ButtomWrap>

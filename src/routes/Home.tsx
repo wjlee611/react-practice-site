@@ -75,7 +75,8 @@ const InfoWrap = styled.div<{ className: any }>`
     top: 160px;
   }
   //Projects Archive
-  & > div:nth-child(3) {
+  & > div:nth-child(3),
+  & > div:nth-child(4) {
     display: flex;
     font-size: 40px;
     font-weight: 700;
@@ -86,15 +87,25 @@ const InfoWrap = styled.div<{ className: any }>`
       margin-left: 10px;
     }
   }
+  & > div:nth-child(4) {
+    top: 173px;
+    margin-left: 30px;
+    & > h1:not(:last-child) {
+      opacity: 0;
+    }
+    & > h1:last-child {
+      font-weight: 400;
+    }
+  }
   //Dev.
-  & > span:nth-child(4) {
+  & > span:nth-child(5) {
     font-size: 15px;
     font-weight: 400;
     margin-left: 30px;
     top: 220px;
   }
   //Woong
-  & > h2:nth-child(5) {
+  & > h2:nth-child(6) {
     font-size: 25px;
     font-weight: 700;
     margin-left: 30px;
@@ -153,6 +164,7 @@ const projectList = [
 
 function Home() {
   const [isLoading, setIsLoading] = useState<boolean | "loading">(false);
+  const [selectedBtn, setSelectedBtn] = useState(0);
   const onClick = () => {
     setIsLoading("loading");
     setTimeout(() => {
@@ -189,6 +201,11 @@ function Home() {
         <div>
           <h1>Projects</h1>
           <h1> Archive</h1>
+        </div>
+        <div>
+          <h1>Projects</h1>
+          <h1> Archive</h1>
+          <h1>_</h1>
         </div>
         <span>Dev.</span>
         <h2>Woong</h2>
