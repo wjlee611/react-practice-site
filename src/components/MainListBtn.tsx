@@ -52,10 +52,8 @@ const titleWrap_border = keyframes`
 `;
 const titleNo = keyframes`
   from {
-    opacity: 0;
     left: -5%;
   } to {
-    opacity: 1;
     left: 0;
   }
 `;
@@ -147,7 +145,9 @@ const TitleNo = styled.div<{ index: number; isLoading: boolean | "loading" }>`
   }
   opacity: ${(props) => (props.isLoading === true ? 1 : 0)};
   animation: ${(props) => (props.isLoading === true ? null : titleNo)} 0.5s
-    cubic-bezier(0, 0.4, 0, 1) forwards;
+      cubic-bezier(0, 0.4, 0, 1) forwards,
+    ${(props) => (props.isLoading === true ? null : to_visible)} 0.2s
+      ease-in-out forwards;
   animation-delay: ${(props) => props.index / 8 + 0.5 + "s"};
   will-change: left;
 `;
@@ -208,7 +208,7 @@ const ContentWrap = styled.div<{ isSelected: boolean }>`
   z-index: 1;
   will-change: height;
 `;
-const Content = styled.div<{ isSelected: boolean }>`
+const Content = styled.div`
   width: 85%;
   height: 463px;
   margin-left: 50px;
@@ -217,9 +217,7 @@ const Content = styled.div<{ isSelected: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: ${(props) =>
-    props.isSelected ? "#00000055" : "#00000000"};
-  transition: background-color 0.3s cubic-bezier(0.6, 0, 0.4, 1);
+  background-color: ${"#00000055"};
   color: white;
 `;
 
@@ -260,7 +258,7 @@ function MainListBtn({ index, proj, isLoading }: IMainListBtn) {
         <span>{proj.position.slice(0, 1).toUpperCase()}</span>
       </TitleIcon>
       <ContentWrap isSelected={isFocused}>
-        <Content isSelected={isFocused}>
+        <Content>
           <span>contents</span>
         </Content>
       </ContentWrap>

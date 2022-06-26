@@ -13,10 +13,10 @@
 
 @keyframes infowrap {
   from {
-    height: 200px;
+    transform: translateY(25%);
   }
   to {
-    height: 300px;
+    transform: translateY(0);
   }
 }
 @keyframes logo {
@@ -29,40 +29,31 @@
 }
 @keyframes accessing {
   from {
-    top: 200px;
+    transform: translateY(20px);
   }
   to {
-    top: 160px;
+    transform: translateY(0);
   }
 }
 @keyframes proj_arch {
   from {
-    left: -100px;
+    transform: translateX(-200px);
   }
   to {
-    left: 100px;
+    transform: translateX(0);
   }
 }
-@keyframes dev {
+@keyframes dev_woong {
   from {
-    top: 270px;
+    transform: translateY(50px);
   }
   to {
-    top: 220px;
-  }
-}
-@keyframes woong {
-  from {
-    top: 285px;
-  }
-  to {
-    top: 235px;
+    transform: translateY(0);
   }
 }
 .infoWrap_loading {
-  height: 200px;
   animation: infowrap 3s cubic-bezier(0.965, 0.19, 0.385, 0.965) forwards;
-  will-change: height;
+  will-change: transform;
 }
 .infoWrap_loading > img {
   animation: logo 1s ease-in-out forwards;
@@ -72,28 +63,33 @@
   animation: accessing 1s cubic-bezier(0, 0, 0, 1) forwards,
     to_visible 0.5s ease-in-out forwards;
   animation-delay: 0.5s;
-  will-change: top;
+  will-change: transform;
 }
 .infoWrap_loading > div:nth-child(3) {
   opacity: 0;
   animation: proj_arch 2s cubic-bezier(0, 0.4, 0, 1) forwards,
     to_visible 0.5s ease-in-out forwards;
   animation-delay: 1s;
-  will-change: left;
+  will-change: transform;
 }
 .infoWrap_loading > span:nth-child(4) {
   opacity: 0;
-  animation: dev 1s cubic-bezier(0, 0, 0, 1) forwards,
+  animation: dev_woong 1s cubic-bezier(0, 0, 0, 1) forwards,
     to_visible 0.5s ease-in-out forwards;
   animation-delay: 1.7s;
-  will-change: top;
+  will-change: transform;
 }
 .infoWrap_loading > h2:nth-child(5) {
   opacity: 0;
-  animation: woong 0.7s cubic-bezier(0, 0, 0, 1) forwards,
+  animation: dev_woong 0.7s cubic-bezier(0, 0, 0, 1) forwards,
     to_visible 0.5s ease-in-out forwards;
   animation-delay: 2s;
-  will-change: top;
+  will-change: transform;
+}
+.infoWrap_loading > div:nth-child(6) {
+  opacity: 0;
+  animation: to_visible 1s linear forwards;
+  animation-delay: 1s;
 }
 
 .frontGradBG_loading {

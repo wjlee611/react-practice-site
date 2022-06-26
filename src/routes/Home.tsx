@@ -46,9 +46,9 @@ const FrontGradBG = styled.div<{ className: any }>`
     font-weight: 400;
   }
 `;
-const InfoWrap = styled.div<{ className: any; isLoading: boolean | "loading" }>`
+const InfoWrap = styled.div<{ className: any }>`
   width: 40%;
-  height: ${(props) => (props.isLoading === true ? "300px" : "100px")};
+  height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -99,6 +99,14 @@ const InfoWrap = styled.div<{ className: any; isLoading: boolean | "loading" }>`
     font-weight: 700;
     margin-left: 30px;
     top: 235px;
+  }
+  //_
+  & > div:nth-child(6) {
+    display: flex;
+    font-size: 40px;
+    font-weight: 400;
+    margin-left: 305px;
+    top: 172px;
   }
 `;
 const ListWrap = styled.div`
@@ -181,7 +189,6 @@ function Home() {
             ? styles.infoWrap_loading
             : styles.invisible
         }
-        isLoading={isLoading}
       >
         <img src={iconImage} />
         <span>Accessing...</span>
@@ -191,6 +198,9 @@ function Home() {
         </div>
         <span>Dev.</span>
         <h2>Woong</h2>
+        <div>
+          <h1>_</h1>
+        </div>
       </InfoWrap>
       <ListWrap>
         <BtnList>
