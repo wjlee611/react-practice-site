@@ -86,11 +86,6 @@
   animation-delay: 2s;
   will-change: transform;
 }
-.infoWrap_loading > div:nth-child(6) {
-  opacity: 0;
-  animation: to_visible 1s linear forwards;
-  animation-delay: 1s;
-}
 
 .frontGradBG_loading {
   opacity: 0;

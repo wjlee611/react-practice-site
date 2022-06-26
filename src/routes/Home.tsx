@@ -100,14 +100,6 @@ const InfoWrap = styled.div<{ className: any }>`
     margin-left: 30px;
     top: 235px;
   }
-  //_
-  & > div:nth-child(6) {
-    display: flex;
-    font-size: 40px;
-    font-weight: 400;
-    margin-left: 305px;
-    top: 172px;
-  }
 `;
 const ListWrap = styled.div`
   width: 60%;
@@ -129,6 +121,7 @@ const BtnList = styled.ul`
   align-items: flex-end;
   padding-top: 100px;
   padding-bottom: 200px;
+  will-change: height;
 `;
 
 //For testing loading animation
@@ -163,7 +156,7 @@ function Home() {
     setIsLoading("loading");
     setTimeout(() => {
       setIsLoading(true);
-    }, 3500); // ani play time(ms)
+    }, 2000 + 125 * projectList.length); // ani play time(ms)
   };
 
   return (
@@ -198,9 +191,6 @@ function Home() {
         </div>
         <span>Dev.</span>
         <h2>Woong</h2>
-        <div>
-          <h1>_</h1>
-        </div>
       </InfoWrap>
       <ListWrap>
         <BtnList>

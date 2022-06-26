@@ -219,6 +219,7 @@ const Content = styled.div`
   justify-content: center;
   background-color: ${"#00000055"};
   color: white;
+  will-change: height;
 `;
 
 interface IMainListBtn {
