@@ -1,5 +1,8 @@
 import { useState } from "react";
 import styled, { keyframes } from "styled-components";
+import frontIcon from "../images/front.svg";
+import backIcon from "../images/back.svg";
+import fullIcon from "../images/full.svg";
 
 const to_visible_blink = keyframes`
   0% {
@@ -176,15 +179,17 @@ const TitleName = styled.div<{ index: number; isLoading: boolean | "loading" }>`
   will-change: right;
 `;
 const TitleIcon = styled.div<{ index: number; isLoading: boolean | "loading" }>`
-  width: 20px;
-  color: white;
+  width: 30px;
+  height: 30px;
   position: absolute;
-  font-size: 30px;
-  font-weight: 700;
   display: flex;
   align-items: flex-start;
   top: 5px;
   right: 0;
+  & > img {
+    filter: invert(91%) sepia(99%) saturate(35%) hue-rotate(254deg)
+      brightness(108%) contrast(100%);
+  }
   opacity: ${(props) => (props.isLoading === true ? 1 : 0)};
   animation: ${(props) => (props.isLoading === true ? null : titleIcon)} 1s
       cubic-bezier(0, 0.4, 0, 1) forwards,
@@ -206,7 +211,7 @@ const ContentWrap = styled.div<{ isSelected: boolean }>`
   top: 37px;
   box-sizing: content-box;
   z-index: 1;
-  will-change: height;
+  will-change: scroll-position, height;
 `;
 const Content = styled.div`
   width: 85%;
@@ -219,7 +224,7 @@ const Content = styled.div`
   justify-content: center;
   background-color: ${"#00000055"};
   color: white;
-  will-change: height;
+  will-change: scroll-position, height;
 `;
 
 interface IMainListBtn {
@@ -256,7 +261,16 @@ function MainListBtn({ index, proj, isLoading }: IMainListBtn) {
         </TitleName>
       </TitleWrap>
       <TitleIcon index={index} isLoading={isLoading}>
-        <span>{proj.position.slice(0, 1).toUpperCase()}</span>
+        <img
+          src={
+            proj.position === "front"
+              ? frontIcon
+              : proj.position === "back"
+              ? backIcon
+              : fullIcon
+          }
+          alt="f/b/fIcon"
+        />
       </TitleIcon>
       <ContentWrap isSelected={isFocused}>
         <Content>

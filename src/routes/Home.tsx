@@ -113,6 +113,7 @@ const ListWrap = styled.div`
     display: none; /* Chrome, Safari, Opera*/
   }
   z-index: 1;
+  will-change: scroll-position;
 `;
 const BtnList = styled.ul`
   width: 100%;
@@ -121,7 +122,7 @@ const BtnList = styled.ul`
   align-items: flex-end;
   padding-top: 100px;
   padding-bottom: 200px;
-  will-change: height;
+  will-change: scroll-position, height;
 `;
 
 //For testing loading animation
@@ -139,15 +140,15 @@ const projectList = [
   { name: "project 4", stacks: ["React"], position: "front" },
   { name: "5오", stacks: ["node.js"], position: "back" },
   { name: "666666", stacks: ["Python"], position: "back" },
-  { name: "777ucky", stacks: ["React", "node.js"], position: "all" },
+  { name: "777ucky", stacks: ["React", "node.js"], position: "full" },
   { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "front" },
   { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "back" },
   { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "front" },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "all" },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "full" },
   { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "back" },
   { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "front" },
   { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "back" },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "all" },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "full" },
 ];
 
 function Home() {
@@ -183,7 +184,7 @@ function Home() {
             : styles.invisible
         }
       >
-        <img src={iconImage} />
+        <img src={iconImage} alt="iconImage" />
         <span>Accessing...</span>
         <div>
           <h1>Projects</h1>
