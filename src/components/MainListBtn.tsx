@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import frontIcon from "../images/front.svg";
 import backIcon from "../images/back.svg";
@@ -96,7 +96,7 @@ const ButtomWrap = styled.button<{
   &:hover > div:first-child {
     opacity: 1;
   }
-  transition: height 0.3s ease-in-out;
+  transition: height 0.3s cubic-bezier(0.7, 0, 0.2, 1);
   opacity: ${(props) => (props.isLoading === true ? 1 : 0)};
   animation: ${(props) => (props.isLoading === true ? null : to_visible_blink)}
     0.2s ease-in-out forwards;
@@ -216,12 +216,11 @@ const ContentWrap = styled.div<{ isSelected: boolean }>`
   align-items: flex-start;
   border-left: 10px solid white;
   margin-left: 30px;
-  transition: height 0.3s ease-in-out, top 0.3s ease-in-out;
+  transition: height 0.3s cubic-bezier(0.7, 0, 0.2, 1), top 0.3s ease-in-out;
   position: absolute;
   top: 37px;
   box-sizing: content-box;
   z-index: 1;
-  will-change: scroll-position, height;
 `;
 const Content = styled.div`
   width: 80%;
@@ -233,7 +232,6 @@ const Content = styled.div`
   justify-content: center;
   background-color: ${"#00000055"};
   color: white;
-  will-change: scroll-position, height;
 `;
 
 interface IMainListBtn {

@@ -53,7 +53,6 @@
 }
 .infoWrap_loading {
   animation: infowrap 3s cubic-bezier(0.965, 0.19, 0.385, 0.965) forwards;
-  will-change: transform;
 }
 .infoWrap_loading > img {
   animation: logo 1s ease-in-out forwards;
@@ -63,14 +62,12 @@
   animation: accessing 1s cubic-bezier(0, 0, 0, 1) forwards,
     to_visible 0.5s ease-in-out forwards;
   animation-delay: 0.5s;
-  will-change: transform;
 }
 .infoWrap_loading > div:nth-child(3) {
   opacity: 0;
   animation: proj_arch 2s cubic-bezier(0, 0.4, 0, 1) forwards,
     to_visible 0.5s ease-in-out forwards;
   animation-delay: 1s;
-  will-change: transform;
 }
 .infoWrap_loading > div:nth-child(4) > h1:last-child {
   opacity: 0;
@@ -82,14 +79,12 @@
   animation: dev_woong 1s cubic-bezier(0, 0, 0, 1) forwards,
     to_visible 0.5s ease-in-out forwards;
   animation-delay: 1.7s;
-  will-change: transform;
 }
 .infoWrap_loading > h2:nth-child(6) {
   opacity: 0;
   animation: dev_woong 0.7s cubic-bezier(0, 0, 0, 1) forwards,
     to_visible 0.5s ease-in-out forwards;
   animation-delay: 2s;
-  will-change: transform;
 }
 
 .frontGradBG_loading {

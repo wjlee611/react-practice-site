@@ -46,7 +46,7 @@ const FrontGradBG = styled.div<{ className: any }>`
     font-weight: 400;
   }
 `;
-const InfoWrap = styled.div<{ className: any }>`
+const InfoWrap = styled.div<{ className: any; isLoading: boolean | "loading" }>`
   width: 40%;
   height: 300px;
   display: flex;
@@ -56,6 +56,7 @@ const InfoWrap = styled.div<{ className: any }>`
   color: white;
   z-index: 1;
   position: relative;
+  will-change: ${(props) => (props.isLoading === true ? null : "transform")};
   & > * {
     position: absolute;
     left: 100px;
@@ -164,14 +165,12 @@ const projectList = [
 
 function Home() {
   const [isLoading, setIsLoading] = useState<boolean | "loading">(false);
-  const [selectedBtn, setSelectedBtn] = useState(0);
   const onClick = () => {
     setIsLoading("loading");
     setTimeout(() => {
       setIsLoading(true);
     }, 2000 + 125 * projectList.length); // ani play time(ms)
   };
-
   return (
     <Background>
       <Helmet>
@@ -195,6 +194,7 @@ function Home() {
             ? styles.infoWrap_loading
             : styles.invisible
         }
+        isLoading={isLoading}
       >
         <img src={iconImage} alt="iconImage" />
         <span>Accessing...</span>
