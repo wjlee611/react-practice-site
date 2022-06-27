@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import MainListBtn from "../components/MainListBtn";
 import styles from "../css/Home.module.css";
@@ -171,6 +171,12 @@ function Home() {
       setIsLoading(true);
     }, 2000 + 125 * projectList.length); // ani play time(ms)
   };
+  useEffect(() => {
+    setIsLoading("loading");
+    setTimeout(() => {
+      setIsLoading(true);
+    }, 2000 + 125 * projectList.length); // ani play time(ms)
+  }, []);
   return (
     <Background>
       <Helmet>
@@ -186,6 +192,18 @@ function Home() {
           ? "status: load, play ani"
           : "status: loading"}
       </LoadBtn>
+      {isLoading === false ? (
+        <h1
+          style={{
+            color: "white",
+            position: "absolute",
+            marginLeft: "50%",
+            fontSize: "40px",
+          }}
+        >
+          Loading...
+        </h1>
+      ) : null}
       <InfoWrap
         className={
           isLoading === true
