@@ -6,6 +6,9 @@ import { Helmet } from "react-helmet";
 // Image assets
 import bgImage from "../images/bg.png";
 import iconImage from "../images/prts.png";
+import frontIcon from "../images/front.svg";
+import backIcon from "../images/back.svg";
+import fullIcon from "../images/full.svg";
 
 const Background = styled.div`
   background-image: linear-gradient(
@@ -146,23 +149,34 @@ const LoadBtn = styled.button`
 `;
 
 const projectList = [
-  { name: "프로젝트1", stacks: ["HTML", "CSS"], position: "front" },
-  { name: "콩콩", stacks: ["Python"], position: "back" },
-  { name: "no.3", stacks: ["HTML", "CSS", "Javascript"], position: "front" },
-  { name: "project 4", stacks: ["React"], position: "front" },
-  { name: "5오", stacks: ["node.js"], position: "back" },
-  { name: "666666", stacks: ["Python"], position: "back" },
-  { name: "777ucky", stacks: ["React", "node.js"], position: "full" },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "front" },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "back" },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "front" },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "full" },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "back" },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "front" },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "back" },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"], position: "full" },
+  { name: "프로젝트1", stacks: ["HTML", "CSS"], posIcon: frontIcon },
+  { name: "콩콩", stacks: ["Python"], posIcon: backIcon },
+  { name: "no.3", stacks: ["HTML", "CSS", "Javascript"], posIcon: frontIcon },
+  { name: "project 4", stacks: ["React"], posIcon: frontIcon },
+  { name: "5오", stacks: ["node.js"], posIcon: backIcon },
+  { name: "666666", stacks: ["Python"], posIcon: backIcon },
+  { name: "777ucky", stacks: ["React", "node.js"], posIcon: fullIcon },
+  {
+    name: "etc temp data",
+    stacks: ["etc", "temp", "data"],
+    posIcon: frontIcon,
+  },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], posIcon: backIcon },
+  {
+    name: "etc temp data",
+    stacks: ["etc", "temp", "data"],
+    posIcon: frontIcon,
+  },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], posIcon: fullIcon },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], posIcon: backIcon },
+  {
+    name: "etc temp data",
+    stacks: ["etc", "temp", "data"],
+    posIcon: frontIcon,
+  },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], posIcon: backIcon },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], posIcon: fullIcon },
 ];
-
 function Home() {
   const [isLoading, setIsLoading] = useState<boolean | "loading">(false);
   const onClick = () => {
@@ -172,11 +186,14 @@ function Home() {
     }, 2000 + 125 * projectList.length); // ani play time(ms)
   };
   useEffect(() => {
-    setIsLoading("loading");
-    setTimeout(() => {
-      setIsLoading(true);
-    }, 2000 + 125 * projectList.length); // ani play time(ms)
+    window.onload = () => {
+      setIsLoading("loading");
+      setTimeout(() => {
+        setIsLoading(true);
+      }, 2000 + 125 * projectList.length); // ani play time(ms)
+    };
   }, []);
+
   return (
     <Background>
       <Helmet>
@@ -193,16 +210,25 @@ function Home() {
           : "status: loading"}
       </LoadBtn>
       {isLoading === false ? (
-        <h1
+        <div
           style={{
+            width: "100vw",
+            height: "100vh",
+            overflow: "hidden",
+            backgroundColor: "#333",
             color: "white",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
             position: "absolute",
-            marginLeft: "50%",
             fontSize: "40px",
           }}
         >
+          <img src={frontIcon} alt="loading" style={{ opacity: "0" }} />
+          <img src={backIcon} alt="loading" style={{ opacity: "0" }} />
+          <img src={fullIcon} alt="loading" style={{ opacity: "0" }} />
           Loading...
-        </h1>
+        </div>
       ) : null}
       <InfoWrap
         className={

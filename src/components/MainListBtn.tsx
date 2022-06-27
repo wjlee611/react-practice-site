@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled, { keyframes } from "styled-components";
-import frontIcon from "../images/front.svg";
-import backIcon from "../images/back.svg";
-import fullIcon from "../images/full.svg";
 import { Link } from "react-router-dom";
 
 const to_visible_blink = keyframes`
@@ -236,7 +233,7 @@ const Content = styled.div`
 
 interface IMainListBtn {
   index: number;
-  proj: { name: string; stacks: string[]; position: string };
+  proj: { name: string; stacks: string[]; posIcon: string };
   isLoading: boolean | "loading";
 }
 function MainListBtn({ index, proj, isLoading }: IMainListBtn) {
@@ -271,16 +268,7 @@ function MainListBtn({ index, proj, isLoading }: IMainListBtn) {
         </TitleName>
       </TitleWrap>
       <TitleIcon index={index} isLoading={isLoading}>
-        <img
-          src={
-            proj.position === "front"
-              ? frontIcon
-              : proj.position === "back"
-              ? backIcon
-              : fullIcon
-          }
-          alt="f/b/fIcon"
-        />
+        <img src={proj.posIcon} alt="f/b/fIcon" />
       </TitleIcon>
       <ContentWrap isSelected={isSelected}>
         <Content>
