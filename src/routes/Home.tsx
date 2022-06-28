@@ -177,21 +177,19 @@ const projectList = [
 function Home() {
   const isFirstLoaded = useRecoilValue(isFirstLoadAtom);
   const setIsFirstLoaded = useSetRecoilState(isFirstLoadAtom);
-  const [isLoading, setIsLoading] = useState<boolean | "loading">(
-    isFirstLoaded
-  );
+  const [isLoading, setIsLoading] = useState<boolean | "loading">(false);
   useEffect(() => {
     if (isFirstLoaded) {
       setIsLoading(true);
     } else {
       setIsFirstLoaded(true);
-      window.onload = () => {
-        setTimeout(() => {
-          setIsLoading("loading");
-        }, 1);
-      };
     }
   }, []);
+  setTimeout(() => {
+    window.onload = () => {
+      setIsLoading("loading");
+    };
+  }, 1);
 
   return (
     <Background>
