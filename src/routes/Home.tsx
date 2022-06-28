@@ -10,6 +10,8 @@ import frontIcon from "../images/front.svg";
 import backIcon from "../images/back.svg";
 import fullIcon from "../images/full.svg";
 import { useLocation } from "react-router-dom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isFirstLoadAtom } from "../atoms";
 
 const Background = styled.div`
   background-image: linear-gradient(
@@ -173,11 +175,16 @@ const projectList = [
   { name: "etc temp data", stacks: ["etc", "temp", "data"], posIcon: fullIcon },
 ];
 function Home() {
-  const [isLoading, setIsLoading] = useState<boolean | "loading">(false);
+  const isFirstLoaded = useRecoilValue(isFirstLoadAtom);
+  const setIsFirstLoaded = useSetRecoilState(isFirstLoadAtom);
+  const firstLoaded = () => setIsFirstLoaded(true);
+  const [isLoading, setIsLoading] = useState<boolean | "loading">(
+    isFirstLoaded
+  );
   useEffect(() => {
-    setIsLoading(true);
     window.onload = () => {
       setIsLoading("loading");
+      firstLoaded();
     };
   }, []);
 
