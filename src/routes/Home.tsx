@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import MainListBtn from "../components/MainListBtn";
 import styles from "../css/Home.module.css";
 import { Helmet } from "react-helmet";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isLoadingAtom } from "../atoms";
 // Image assets
 import bgImage from "../images/bg.png";
 import iconImage from "../images/prts.png";
 import frontIcon from "../images/front.svg";
 import backIcon from "../images/back.svg";
 import fullIcon from "../images/full.svg";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { isFirstLoadAtom } from "../atoms";
 
 const Background = styled.div`
   background-image: linear-gradient(
@@ -145,49 +145,32 @@ const BtnList = styled.ul`
 `;
 
 const projectList = [
-  { name: "프로젝트1", stacks: ["HTML", "CSS"], posIcon: frontIcon },
-  { name: "콩콩", stacks: ["Python"], posIcon: backIcon },
-  { name: "no.3", stacks: ["HTML", "CSS", "Javascript"], posIcon: frontIcon },
-  { name: "project 4", stacks: ["React"], posIcon: frontIcon },
-  { name: "5오", stacks: ["node.js"], posIcon: backIcon },
-  { name: "666666", stacks: ["Python"], posIcon: backIcon },
-  { name: "777ucky", stacks: ["React", "node.js"], posIcon: fullIcon },
-  {
-    name: "etc temp data",
-    stacks: ["etc", "temp", "data"],
-    posIcon: frontIcon,
-  },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"], posIcon: backIcon },
-  {
-    name: "etc temp data",
-    stacks: ["etc", "temp", "data"],
-    posIcon: frontIcon,
-  },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"], posIcon: fullIcon },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"], posIcon: backIcon },
-  {
-    name: "etc temp data",
-    stacks: ["etc", "temp", "data"],
-    posIcon: frontIcon,
-  },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"], posIcon: backIcon },
-  { name: "etc temp data", stacks: ["etc", "temp", "data"], posIcon: fullIcon },
+  { name: "프로젝트1", stacks: ["HTML", "CSS"], pos: frontIcon },
+  { name: "콩콩", stacks: ["Python"], pos: backIcon },
+  { name: "no.3", stacks: ["HTML", "CSS", "Javascript"], pos: frontIcon },
+  { name: "project 4", stacks: ["React"], pos: frontIcon },
+  { name: "5오", stacks: ["node.js"], pos: backIcon },
+  { name: "666666", stacks: ["Python"], pos: backIcon },
+  { name: "777ucky", stacks: ["React", "node.js"], pos: fullIcon },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], pos: frontIcon },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], pos: backIcon },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], pos: fullIcon },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], pos: frontIcon },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], pos: backIcon },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], pos: fullIcon },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], pos: frontIcon },
+  { name: "etc temp data", stacks: ["etc", "temp", "data"], pos: backIcon },
 ];
 function Home() {
-  const isFirstLoaded = useRecoilValue(isFirstLoadAtom);
-  const setIsFirstLoaded = useSetRecoilState(isFirstLoadAtom);
-  const [isLoading, setIsLoading] = useState<boolean | "loading">(false);
+  const isLoading = useRecoilValue(isLoadingAtom);
+  const setIsLoading = useSetRecoilState(isLoadingAtom);
   useEffect(() => {
-    setIsLoading(true);
-    if (!isFirstLoaded) {
-      setIsLoading(false);
-      setIsFirstLoaded(true);
-      setTimeout(() => {
-        window.onload = () => {
-          setIsLoading("loading");
-        };
-      }, 1);
-    }
+    window.onload = () => {
+      setIsLoading("loading");
+      // setTimeout(() => {
+      //   setIsLoading(true);
+      // }, 2000 + 125 * projectList.length); // ani play time(ms))
+    };
   }, []);
 
   return (
@@ -210,9 +193,9 @@ function Home() {
             fontSize: "40px",
           }}
         >
-          <img src={frontIcon} alt="loading" style={{ opacity: "0" }} />
-          <img src={backIcon} alt="loading" style={{ opacity: "0" }} />
-          <img src={fullIcon} alt="loading" style={{ opacity: "0" }} />
+          <img src={frontIcon} alt="icon" style={{ opacity: "0" }} />
+          <img src={backIcon} alt="icon" style={{ opacity: "0" }} />
+          <img src={fullIcon} alt="icon" style={{ opacity: "0" }} />
           Loading...
         </div>
       ) : null}
@@ -245,12 +228,7 @@ function Home() {
           {isLoading === false
             ? null
             : projectList.map((item, index) => (
-                <MainListBtn
-                  key={index}
-                  index={index}
-                  proj={item}
-                  isLoading={isLoading}
-                />
+                <MainListBtn key={index} index={index} proj={item} />
               ))}
         </BtnList>
       </ListWrap>

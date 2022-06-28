@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isLoadingAtom } from "../atoms";
 
 const to_visible_blink = keyframes`
   0% {
@@ -233,13 +235,18 @@ const Content = styled.div`
 
 interface IMainListBtn {
   index: number;
-  proj: { name: string; stacks: string[]; posIcon: string };
-  isLoading: boolean | "loading";
+  proj: { name: string; stacks: string[]; pos: string };
 }
-function MainListBtn({ index, proj, isLoading }: IMainListBtn) {
+function MainListBtn({ index, proj }: IMainListBtn) {
+  const isLoading = useRecoilValue(isLoadingAtom);
+  const setIsLoading = useSetRecoilState(isLoadingAtom);
+
   const [isSelected, setIsSelected] = useState(false);
   const onClick = () => {
     setIsSelected((prev) => !prev);
+  };
+  const onContentClick = () => {
+    setIsLoading(true);
   };
   return (
     <ButtomWrap
@@ -268,12 +275,15 @@ function MainListBtn({ index, proj, isLoading }: IMainListBtn) {
         </TitleName>
       </TitleWrap>
       <TitleIcon index={index} isLoading={isLoading}>
-        <img src={proj.posIcon} alt="f/b/fIcon" />
+        <img src={proj.pos} alt="f/b/fIcon" />
       </TitleIcon>
       <ContentWrap isSelected={isSelected}>
         <Content>
           <span>contents</span>
-          <Link to={{ pathname: `/portfolio-site/${(index + 1).toString()}` }}>
+          <Link
+            onClick={onContentClick}
+            to={{ pathname: `/portfolio-site/${(index + 1).toString()}` }}
+          >
             click
           </Link>
         </Content>
