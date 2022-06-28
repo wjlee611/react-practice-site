@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 import MainListBtn from "../components/MainListBtn";
 import styles from "../css/Home.module.css";
@@ -163,16 +162,7 @@ const projectList = [
 ];
 function Home() {
   const isLoading = useRecoilValue(isLoadingAtom);
-  const setIsLoading = useSetRecoilState(isLoadingAtom);
-  useEffect(() => {
-    window.onload = () => {
-      setIsLoading("loading");
-      // setTimeout(() => {
-      //   setIsLoading(true);
-      // }, 2000 + 125 * projectList.length); // ani play time(ms))
-    };
-  }, []);
-
+  console.log(isLoading);
   return (
     <Background>
       <Helmet>
