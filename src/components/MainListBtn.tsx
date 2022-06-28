@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { isFirstLoadAtom } from "../atoms";
 
 const to_visible_blink = keyframes`
   0% {
@@ -237,6 +239,8 @@ interface IMainListBtn {
   isLoading: boolean | "loading";
 }
 function MainListBtn({ index, proj, isLoading }: IMainListBtn) {
+  const setIsFirstLoaded = useSetRecoilState(isFirstLoadAtom);
+  const onLinkClick = () => setIsFirstLoaded(true);
   const [isSelected, setIsSelected] = useState(false);
   const onClick = () => {
     setIsSelected((prev) => !prev);
@@ -273,7 +277,10 @@ function MainListBtn({ index, proj, isLoading }: IMainListBtn) {
       <ContentWrap isSelected={isSelected}>
         <Content>
           <span>contents</span>
-          <Link to={{ pathname: `/portfolio-site/${(index + 1).toString()}` }}>
+          <Link
+            onClick={onLinkClick}
+            to={{ pathname: `/portfolio-site/${(index + 1).toString()}` }}
+          >
             click
           </Link>
         </Content>
