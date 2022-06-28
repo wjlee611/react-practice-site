@@ -23,7 +23,9 @@ const Background = styled.div`
   overflow: hidden;
   display: flex;
   align-items: center;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
 const FrontGradBG = styled.div<{ className: any }>`
   width: 100vw;
@@ -141,12 +143,12 @@ const BtnList = styled.ul`
 `;
 
 //For testing loading animation
-const LoadBtn = styled.button`
-  position: absolute;
-  top: 100px;
-  left: 50px;
-  z-index: 3;
-`;
+// const LoadBtn = styled.button`
+//   position: absolute;
+//   top: 100px;
+//   left: 50px;
+//   z-index: 3;
+// `;
 
 const projectList = [
   { name: "프로젝트1", stacks: ["HTML", "CSS"], posIcon: frontIcon },
@@ -178,13 +180,13 @@ const projectList = [
   { name: "etc temp data", stacks: ["etc", "temp", "data"], posIcon: fullIcon },
 ];
 function Home() {
-  const [isLoading, setIsLoading] = useState<boolean | "loading">(false);
-  const onClick = () => {
-    setIsLoading("loading");
-    setTimeout(() => {
-      setIsLoading(true);
-    }, 2000 + 125 * projectList.length); // ani play time(ms)
-  };
+  const [isLoading, setIsLoading] = useState<boolean | "loading">(true);
+  // const onClick = () => {
+  //   setIsLoading("loading");
+  //   setTimeout(() => {
+  //     setIsLoading(true);
+  //   }, 2000 + 125 * projectList.length); // ani play time(ms)
+  // };
   useEffect(() => {
     window.onload = () => {
       setIsLoading("loading");
@@ -199,7 +201,7 @@ function Home() {
       <Helmet>
         <title>dev.Woong</title>
       </Helmet>
-      <LoadBtn
+      {/* <LoadBtn
         onClick={onClick}
         disabled={isLoading === "loading" ? true : false}
       >
@@ -208,7 +210,7 @@ function Home() {
           : isLoading === "loading"
           ? "status: load, play ani"
           : "status: loading"}
-      </LoadBtn>
+      </LoadBtn> */}
       {isLoading === false ? (
         <div
           style={{

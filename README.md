@@ -6,7 +6,7 @@ This project was created to explain myself as developer.
 
 This site contains the following contents.
 
-### `/`
+### `/portfolio-site`
 
 Main page.\
 Contains the following contents.
@@ -15,6 +15,16 @@ Contains the following contents.
 - Contacting method
 - Project list
 
+### `/portfolio-site/:project`
+
+Project info page.\
+Contains the following contents.
+
+- Project infomation
+- Used stacks
+- Timeline
+- Run images
+
 ## Used stacks
 
 - React (typescript)
@@ -22,3 +32,4 @@ Contains the following contents.
   - react-router-dom@5.3.0
   - react-query
   - react-helmet
+  - react-transition-group
