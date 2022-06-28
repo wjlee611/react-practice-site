@@ -178,10 +178,9 @@ function Home() {
   const isFirstLoaded = useRecoilValue(isFirstLoadAtom);
   const setIsFirstLoaded = useSetRecoilState(isFirstLoadAtom);
   const firstLoaded = () => setIsFirstLoaded(true);
-  const [isLoading, setIsLoading] = useState<boolean | "loading">(
-    isFirstLoaded
-  );
+  const [isLoading, setIsLoading] = useState<boolean | "loading">(false);
   useEffect(() => {
+    setIsLoading(isFirstLoaded);
     window.onload = () => {
       setIsLoading("loading");
       firstLoaded();
