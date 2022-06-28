@@ -9,7 +9,6 @@ import iconImage from "../images/prts.png";
 import frontIcon from "../images/front.svg";
 import backIcon from "../images/back.svg";
 import fullIcon from "../images/full.svg";
-import { useLocation } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isFirstLoadAtom } from "../atoms";
 
@@ -179,17 +178,17 @@ function Home() {
   const setIsFirstLoaded = useSetRecoilState(isFirstLoadAtom);
   const [isLoading, setIsLoading] = useState<boolean | "loading">(false);
   useEffect(() => {
-    if (isFirstLoaded) {
-      setIsLoading(true);
-    } else {
+    setIsLoading(true);
+    if (!isFirstLoaded) {
+      setIsLoading(false);
       setIsFirstLoaded(true);
+      setTimeout(() => {
+        window.onload = () => {
+          setIsLoading("loading");
+        };
+      }, 1);
     }
   }, []);
-  setTimeout(() => {
-    window.onload = () => {
-      setIsLoading("loading");
-    };
-  }, 1);
 
   return (
     <Background>
