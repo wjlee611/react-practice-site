@@ -181,11 +181,16 @@ function Home() {
     isFirstLoaded
   );
   useEffect(() => {
-    setIsLoading(isFirstLoaded);
-    setIsFirstLoaded(true);
-    window.onload = () => {
-      setIsLoading("loading");
-    };
+    if (isFirstLoaded) {
+      setIsLoading(true);
+    } else {
+      setIsFirstLoaded(true);
+      window.onload = () => {
+        setTimeout(() => {
+          setIsLoading("loading");
+        }, 1);
+      };
+    }
   }, []);
 
   return (
