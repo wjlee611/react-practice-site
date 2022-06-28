@@ -3,7 +3,10 @@ body {
 }
 
 .transition-group {
+  width: 100vw;
+  height: 100vh;
   position: relative;
+  overflow: hidden;
 }
 
 .fade-enter {

@@ -9,6 +9,7 @@ import iconImage from "../images/prts.png";
 import frontIcon from "../images/front.svg";
 import backIcon from "../images/back.svg";
 import fullIcon from "../images/full.svg";
+import { useLocation } from "react-router-dom";
 
 const Background = styled.div`
   background-image: linear-gradient(
@@ -142,14 +143,6 @@ const BtnList = styled.ul`
   will-change: scroll-position, height;
 `;
 
-//For testing loading animation
-// const LoadBtn = styled.button`
-//   position: absolute;
-//   top: 100px;
-//   left: 50px;
-//   z-index: 3;
-// `;
-
 const projectList = [
   { name: "프로젝트1", stacks: ["HTML", "CSS"], posIcon: frontIcon },
   { name: "콩콩", stacks: ["Python"], posIcon: backIcon },
@@ -180,19 +173,11 @@ const projectList = [
   { name: "etc temp data", stacks: ["etc", "temp", "data"], posIcon: fullIcon },
 ];
 function Home() {
-  const [isLoading, setIsLoading] = useState<boolean | "loading">(true);
-  // const onClick = () => {
-  //   setIsLoading("loading");
-  //   setTimeout(() => {
-  //     setIsLoading(true);
-  //   }, 2000 + 125 * projectList.length); // ani play time(ms)
-  // };
+  const [isLoading, setIsLoading] = useState<boolean | "loading">(false);
   useEffect(() => {
+    setIsLoading(true);
     window.onload = () => {
       setIsLoading("loading");
-      setTimeout(() => {
-        setIsLoading(true);
-      }, 2000 + 125 * projectList.length); // ani play time(ms)
     };
   }, []);
 
@@ -201,16 +186,6 @@ function Home() {
       <Helmet>
         <title>dev.Woong</title>
       </Helmet>
-      {/* <LoadBtn
-        onClick={onClick}
-        disabled={isLoading === "loading" ? true : false}
-      >
-        {isLoading === true
-          ? "status: loaded"
-          : isLoading === "loading"
-          ? "status: load, play ani"
-          : "status: loading"}
-      </LoadBtn> */}
       {isLoading === false ? (
         <div
           style={{
