@@ -2,7 +2,7 @@ import styled from "styled-components";
 import MainListBtn from "../components/MainListBtn";
 import styles from "../css/Home.module.css";
 import { Helmet } from "react-helmet";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { isLoadingAtom } from "../atoms";
 // Image assets
 import bgImage from "../images/bg.png";
@@ -10,6 +10,7 @@ import iconImage from "../images/prts.png";
 import frontIcon from "../images/front.svg";
 import backIcon from "../images/back.svg";
 import fullIcon from "../images/full.svg";
+import { useEffect, useState } from "react";
 
 const Background = styled.div`
   background-image: linear-gradient(
@@ -161,7 +162,15 @@ const projectList = [
   { name: "etc temp data", stacks: ["etc", "temp", "data"], pos: backIcon },
 ];
 function Home() {
-  const isLoading = useRecoilValue(isLoadingAtom);
+  const [isLoading, setIsLoading] = useState<boolean | "loading">(false);
+  const isRecoilLoading = useRecoilValue(isLoadingAtom);
+  useEffect(() => {
+    if (isRecoilLoading === true) {
+      setIsLoading(true);
+    } else {
+      setIsLoading("loading");
+    }
+  }, [isRecoilLoading]);
   console.log(isLoading);
   return (
     <Background>
