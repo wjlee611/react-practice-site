@@ -11,6 +11,7 @@ import frontIcon from "../images/front.svg";
 import backIcon from "../images/back.svg";
 import fullIcon from "../images/full.svg";
 import { useEffect, useState } from "react";
+import MainLoading from "../components/MainLoading";
 
 const Background = styled.div`
   background-image: linear-gradient(
@@ -177,27 +178,9 @@ function Home() {
       <Helmet>
         <title>dev.Woong</title>
       </Helmet>
-      {isLoading === false ? (
-        <div
-          style={{
-            width: "100vw",
-            height: "100vh",
-            overflow: "hidden",
-            backgroundColor: "#333",
-            color: "white",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            position: "absolute",
-            fontSize: "40px",
-          }}
-        >
-          <img src={frontIcon} alt="icon" style={{ opacity: "0" }} />
-          <img src={backIcon} alt="icon" style={{ opacity: "0" }} />
-          <img src={fullIcon} alt="icon" style={{ opacity: "0" }} />
-          Loading...
-        </div>
-      ) : null}
+      {isLoading === true ? null : (
+        <MainLoading icons={[frontIcon, backIcon, fullIcon]} />
+      )}
       <InfoWrap
         className={
           isLoading === true

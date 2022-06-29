@@ -99,7 +99,7 @@ const ButtomWrap = styled.button<{
   opacity: ${(props) => (props.isLoading === true ? 1 : 0)};
   animation: ${(props) => (props.isLoading === true ? null : to_visible_blink)}
     0.2s ease-in-out forwards;
-  animation-delay: ${(props) => props.index / 8 + "s"};
+  animation-delay: ${(props) => props.index / 8 + 0.5 + "s"};
 `;
 const TitleGradBG = styled.div<{
   isSelected: boolean;
@@ -115,7 +115,7 @@ const TitleGradBG = styled.div<{
   transition: opacity 0.2s ease-out;
   animation: ${(props) => (props.isLoading === true ? null : titleWrap_border)}
     1s cubic-bezier(0, 0.4, 0, 1) forwards;
-  animation-delay: ${(props) => props.index / 8 + "s"};
+  animation-delay: ${(props) => props.index / 8 + 0.5 + "s"};
   will-change: width;
 `;
 const TitleWrap = styled.div<{ index: number; isLoading: boolean | "loading" }>`
@@ -128,7 +128,7 @@ const TitleWrap = styled.div<{ index: number; isLoading: boolean | "loading" }>`
   position: absolute;
   animation: ${(props) => (props.isLoading === true ? null : titleWrap_border)}
     1s cubic-bezier(0, 0.4, 0, 1) forwards;
-  animation-delay: ${(props) => props.index / 8 + "s"};
+  animation-delay: ${(props) => props.index / 8 + 0.5 + "s"};
   will-change: width;
 `;
 const TitleNo = styled.div<{ index: number; isLoading: boolean | "loading" }>`
@@ -156,7 +156,7 @@ const TitleNo = styled.div<{ index: number; isLoading: boolean | "loading" }>`
       cubic-bezier(0, 0.4, 0, 1) forwards,
     ${(props) => (props.isLoading === true ? null : to_visible)} 0.2s
       ease-in-out forwards;
-  animation-delay: ${(props) => props.index / 8 + 0.5 + "s"};
+  animation-delay: ${(props) => props.index / 8 + 1 + "s"};
   will-change: left;
 `;
 const TitleName = styled.div<{ index: number; isLoading: boolean | "loading" }>`
@@ -183,7 +183,7 @@ const TitleName = styled.div<{ index: number; isLoading: boolean | "loading" }>`
       cubic-bezier(1, 0, 0.3, 1) forwards,
     ${(props) => (props.isLoading === true ? null : to_visible)} 0.2s
       ease-in-out forwards;
-  animation-delay: ${(props) => props.index / 8 + 0.7 + "s"};
+  animation-delay: ${(props) => props.index / 8 + 1.2 + "s"};
   will-change: right;
 `;
 const TitleIcon = styled.div<{ index: number; isLoading: boolean | "loading" }>`
@@ -203,7 +203,7 @@ const TitleIcon = styled.div<{ index: number; isLoading: boolean | "loading" }>`
       cubic-bezier(0, 0.4, 0, 1) forwards,
     ${(props) => (props.isLoading === true ? null : to_visible)} 0.5s
       ease-in-out forwards;
-  animation-delay: ${(props) => props.index / 8 + 1 + "s"};
+  animation-delay: ${(props) => props.index / 8 + 1.5 + "s"};
   will-change: right;
 `;
 const ContentWrap = styled.div<{ isSelected: boolean }>`
