@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { isLoadingAtom } from "../atoms";
@@ -35,10 +36,10 @@ const IconGroup = styled.div`
 `;
 
 interface IMainLoading {
+  isLoading: boolean | "loading";
   icons: string[];
 }
-function MainLoading({ icons }: IMainLoading) {
-  const isLoading = useRecoilValue(isLoadingAtom);
+function MainLoading({ isLoading, icons }: IMainLoading) {
   return (
     <LoadWrap isLoading={isLoading}>
       <IconGroup>

@@ -179,7 +179,10 @@ function Home() {
         <title>dev.Woong</title>
       </Helmet>
       {isLoading === true ? null : (
-        <MainLoading icons={[frontIcon, backIcon, fullIcon]} />
+        <MainLoading
+          isLoading={isLoading}
+          icons={[frontIcon, backIcon, fullIcon]}
+        />
       )}
       <InfoWrap
         className={
