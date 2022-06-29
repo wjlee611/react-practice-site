@@ -21,10 +21,7 @@ function Project() {
   const { project } = useParams<RouteParams>();
   return (
     <Background>
-      <Link
-        to={{ pathname: `/portfolio-site` }}
-        style={{ color: "white", fontSize: "20px" }}
-      >
+      <Link to={{ pathname: `/` }} style={{ color: "white", fontSize: "20px" }}>
         Back to Main
       </Link>
       <h1 style={{ color: "white", fontSize: "40px", marginLeft: "20px" }}>

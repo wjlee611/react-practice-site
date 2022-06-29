@@ -25,11 +25,8 @@ function Router() {
             <TransitionGroup className="transition-group">
               <CSSTransition key={location.key} timeout={500} classNames="fade">
                 <Switch location={location}>
-                  <Route exact path="/portfolio-site" component={Home}></Route>
-                  <Route
-                    path="/portfolio-site/:project"
-                    component={Project}
-                  ></Route>
+                  <Route exact path="/" component={Home}></Route>
+                  <Route path="/:project" component={Project}></Route>
                 </Switch>
               </CSSTransition>
             </TransitionGroup>

@@ -282,7 +282,7 @@ function MainListBtn({ index, proj }: IMainListBtn) {
           <span>contents</span>
           <Link
             onClick={onContentClick}
-            to={{ pathname: `/portfolio-site/${(index + 1).toString()}` }}
+            to={{ pathname: `/${(index + 1).toString()}` }}
           >
             click
           </Link>
