@@ -3,7 +3,7 @@ import MainListBtn from "../components/MainListBtn";
 import styles from "../css/Home.module.css";
 import { Helmet } from "react-helmet";
 import { useRecoilValue } from "recoil";
-import { isLoadingAtom } from "../atoms";
+import { isLoadingAtom, mainTabSelected } from "../atoms";
 // Image assets
 import bgImage from "../images/bg.png";
 import iconImage from "../images/prts.png";
@@ -41,10 +41,10 @@ const FrontGradBG = styled.div<{ className: any }>`
   background: linear-gradient(
     0deg,
     #000000ff 0%,
-    #00000000 20% calc(100% - 70px),
+    #00000000 200px calc(100% - 100px),
     #000000ff 100%
   );
-  z-index: 2;
+  z-index: 4;
   pointer-events: none;
   display: flex;
   justify-content: center;
@@ -63,7 +63,8 @@ const FrontGradBG = styled.div<{ className: any }>`
   }
 `;
 const ListWrap = styled.div`
-  width: 100vh;
+  width: 100vw;
+  max-width: 900px;
   height: 100vh;
   overflow: hidden;
   overflow-y: scroll;
@@ -74,6 +75,8 @@ const ListWrap = styled.div`
   }
   z-index: 1;
   will-change: scroll-position;
+  position: absolute;
+  right: 0;
 `;
 const BtnList = styled.ul`
   width: 100%;
@@ -83,7 +86,19 @@ const BtnList = styled.ul`
   padding-top: 100px;
   padding-bottom: 200px;
   will-change: scroll-position, height;
-  padding-right: 50px;
+  padding-right: 50px; //0px @mobile screen
+`;
+const ContentWrap = styled.div<{ isSelected: boolean }>`
+  width: 480px;
+  height: calc(100vh - 80px);
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 20px;
+  position: absolute;
+  left: 10px;
+  bottom: -20px;
+  z-index: 2;
+  transform: translateY(${(props) => (props.isSelected ? "0" : "100vh")});
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0, 1);
 `;
 const TabWrap = styled.ul`
   width: 500px;
@@ -95,7 +110,8 @@ const TabWrap = styled.ul`
   justify-content: space-evenly;
   align-items: center;
   background-color: rgba(0, 0, 0, 0);
-  z-index: 3;
+  z-index: 5;
+  pointer-events: none;
 `;
 
 const projectList = [
@@ -118,6 +134,7 @@ const projectList = [
 function Home() {
   const [isLoading, setIsLoading] = useState<boolean | "loading">(false);
   const isRecoilLoading = useRecoilValue(isLoadingAtom);
+  const mainTabIdx = useRecoilValue(mainTabSelected);
   useEffect(() => {
     if (isRecoilLoading === true) {
       setIsLoading(true);
@@ -161,6 +178,7 @@ function Home() {
           <span>PROJECTS ARCHIVE</span>
         </div>
       </FrontGradBG>
+      <ContentWrap isSelected={mainTabIdx !== 0}></ContentWrap>
       <TabWrap>
         <li>
           <MainTabBtn title={"Home"} index={0} />

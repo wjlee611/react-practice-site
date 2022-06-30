@@ -107,7 +107,6 @@ const TitleGradBG = styled.div<{
 }>`
   width: ${(props) => (props.isLoading === true ? "80%" : "0%")};
   height: 40px;
-  margin-left: 100px;
   position: absolute;
   right: 50px;
   background: linear-gradient(175deg, #00000000 20%, #00000099);
@@ -121,7 +120,6 @@ const TitleGradBG = styled.div<{
 const TitleWrap = styled.div<{ index: number; isLoading: boolean | "loading" }>`
   width: ${(props) => (props.isLoading === true ? "80%" : "0%")};
   height: 40px;
-  margin-left: 100px;
   border-bottom: 3px solid white;
   display: flex;
   z-index: 2;

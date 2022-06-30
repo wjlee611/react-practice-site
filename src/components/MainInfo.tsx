@@ -10,9 +10,10 @@ const InfoWrap = styled.div<{ className: any; isLoading: boolean | "loading" }>`
   flex-direction: column;
   justify-content: center;
   color: white;
-  z-index: 1;
+  z-index: 3;
   position: absolute;
   left: 0;
+  pointer-events: none;
   will-change: ${(props) => (props.isLoading === true ? null : "transform")};
   & > * {
     position: absolute;

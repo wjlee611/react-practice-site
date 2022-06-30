@@ -10,6 +10,7 @@ const BtnWrap = styled.button<{ isSelected: boolean }>`
   align-items: center;
   background-color: rgba(0, 0, 0, 0);
   border: none;
+  pointer-events: auto;
   & > h1 {
     color: white;
     font-size: 20px;
@@ -28,6 +29,7 @@ const BtnUnderBarCover = styled.div`
 const BtnUnderBar = styled.div<{ isSelected: boolean }>`
   width: ${(props) => (props.isSelected ? "100px" : "0px")};
   height: 3px;
+  border-radius: 1.5px;
   background-color: #00ffab;
   position: absolute;
   z-index: 1;
@@ -36,6 +38,7 @@ const BtnUnderBar = styled.div<{ isSelected: boolean }>`
 const BtnUnderBarBack = styled.div`
   width: 100px;
   height: 3px;
+  border-radius: 1.5px;
   background-color: #00000055;
   position: absolute;
   z-index: 0;
