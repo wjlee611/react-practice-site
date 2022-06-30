@@ -12,6 +12,8 @@ import backIcon from "../images/back.svg";
 import fullIcon from "../images/full.svg";
 import { useEffect, useState } from "react";
 import MainLoading from "../components/MainLoading";
+import MainTabBtn from "../components/MainTabBtn";
+import MainInfo from "../components/MainInfo";
 
 const Background = styled.div`
   background-image: linear-gradient(
@@ -26,7 +28,8 @@ const Background = styled.div`
   overflow: hidden;
   display: flex;
   align-items: center;
-  position: absolute;
+  justify-content: flex-end;
+  position: relative;
   top: 0;
   left: 0;
 `;
@@ -35,7 +38,12 @@ const FrontGradBG = styled.div<{ className: any }>`
   height: 100vh;
   overflow: hidden;
   position: absolute;
-  background: ${"linear-gradient(0deg, #000000ff 0%, #00000000 20% 92%, #000000ff 100%)"};
+  background: linear-gradient(
+    0deg,
+    #000000ff 0%,
+    #00000000 20% calc(100% - 70px),
+    #000000ff 100%
+  );
   z-index: 2;
   pointer-events: none;
   display: flex;
@@ -54,77 +62,9 @@ const FrontGradBG = styled.div<{ className: any }>`
     font-weight: 400;
   }
 `;
-const InfoWrap = styled.div<{ className: any; isLoading: boolean | "loading" }>`
-  width: 40%;
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 100px;
-  color: white;
-  z-index: 1;
-  position: relative;
-  will-change: ${(props) => (props.isLoading === true ? null : "transform")};
-  & > * {
-    position: absolute;
-    left: 100px;
-  }
-  //logo
-  & > img:first-child {
-    width: 150px;
-    height: 150px;
-    margin-bottom: 20px;
-    top: 0;
-  }
-  //Accessing...
-  & > span:nth-child(2) {
-    font-size: 20px;
-    font-weight: 400;
-    margin-left: 30px;
-    top: 160px;
-  }
-  //Projects Archive
-  & > div:nth-child(3),
-  & > div:nth-child(4) {
-    display: flex;
-    font-size: 40px;
-    font-weight: 700;
-    margin-left: 28px;
-    top: 180px;
-    & > h1:last-child {
-      font-weight: 400;
-      margin-left: 10px;
-    }
-  }
-  & > div:nth-child(4) {
-    top: 173px;
-    margin-left: 30px;
-    & > h1:not(:last-child) {
-      opacity: 0;
-    }
-    & > h1:last-child {
-      font-weight: 400;
-    }
-  }
-  //Dev.
-  & > span:nth-child(5) {
-    font-size: 15px;
-    font-weight: 400;
-    margin-left: 30px;
-    top: 220px;
-  }
-  //Woong
-  & > h2:nth-child(6) {
-    font-size: 25px;
-    font-weight: 700;
-    margin-left: 30px;
-    top: 235px;
-  }
-`;
 const ListWrap = styled.div`
-  width: 60%;
+  width: 100vh;
   height: 100vh;
-  margin-right: 100px;
   overflow: hidden;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
@@ -139,10 +79,23 @@ const BtnList = styled.ul`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   padding-top: 100px;
   padding-bottom: 200px;
   will-change: scroll-position, height;
+  padding-right: 50px;
+`;
+const TabWrap = styled.ul`
+  width: 500px;
+  height: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 3;
 `;
 
 const projectList = [
@@ -181,33 +134,10 @@ function Home() {
       {isLoading === true ? null : (
         <MainLoading
           isLoading={isLoading}
-          icons={[frontIcon, backIcon, fullIcon]}
+          assets={[iconImage, bgImage, frontIcon, backIcon, fullIcon]}
         />
       )}
-      <InfoWrap
-        className={
-          isLoading === true
-            ? null
-            : isLoading === "loading"
-            ? styles.infoWrap_loading
-            : styles.invisible
-        }
-        isLoading={isLoading}
-      >
-        <img src={iconImage} alt="iconImage" />
-        <span>Accessing...</span>
-        <div>
-          <h1>Projects</h1>
-          <h1> Archive</h1>
-        </div>
-        <div>
-          <h1>Projects</h1>
-          <h1> Archive</h1>
-          <h1>_</h1>
-        </div>
-        <span>Dev.</span>
-        <h2>Woong</h2>
-      </InfoWrap>
+      <MainInfo assets={[iconImage]} />
       <ListWrap>
         <BtnList>
           {isLoading === false
@@ -231,6 +161,17 @@ function Home() {
           <span>PROJECTS ARCHIVE</span>
         </div>
       </FrontGradBG>
+      <TabWrap>
+        <li>
+          <MainTabBtn title={"Home"} index={0} />
+        </li>
+        <li>
+          <MainTabBtn title={"Info"} index={1} />
+        </li>
+        <li>
+          <MainTabBtn title={"Contect"} index={2} />
+        </li>
+      </TabWrap>
     </Background>
   );
 }

@@ -80,8 +80,7 @@ const ButtomWrap = styled.button<{
   index: number;
   isLoading: boolean | "loading";
 }>`
-  width: 100%;
-  max-width: 800px;
+  width: 90%;
   height: ${(props) => (props.isSelected ? "500px" : "40px")};
   background-color: rgba(0, 0, 0, 0);
   border: none;
@@ -110,7 +109,8 @@ const TitleGradBG = styled.div<{
   height: 40px;
   margin-left: 100px;
   position: absolute;
-  background: ${"linear-gradient(175deg, #00000000 20%, #00000099)"};
+  right: 50px;
+  background: linear-gradient(175deg, #00000000 20%, #00000099);
   opacity: ${(props) => (props.isSelected ? 1 : 0)};
   transition: opacity 0.2s ease-out;
   animation: ${(props) => (props.isLoading === true ? null : titleWrap_border)}
@@ -126,6 +126,7 @@ const TitleWrap = styled.div<{ index: number; isLoading: boolean | "loading" }>`
   display: flex;
   z-index: 2;
   position: absolute;
+  right: 50px;
   animation: ${(props) => (props.isLoading === true ? null : titleWrap_border)}
     1s cubic-bezier(0, 0.4, 0, 1) forwards;
   animation-delay: ${(props) => props.index / 8 + 0.5 + "s"};
@@ -160,13 +161,13 @@ const TitleNo = styled.div<{ index: number; isLoading: boolean | "loading" }>`
   will-change: left;
 `;
 const TitleName = styled.div<{ index: number; isLoading: boolean | "loading" }>`
+  width: 200px;
   height: 40px;
   padding-bottom: 5px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   color: white;
-  width: 200px;
   align-items: center;
   position: absolute;
   right: 0;
@@ -175,7 +176,7 @@ const TitleName = styled.div<{ index: number; isLoading: boolean | "loading" }>`
     font-weight: 700;
     & > span:first-child,
     & > span:last-child {
-      color: ${"#00FFAB"};
+      color: #00ffab;
     }
   }
   opacity: ${(props) => (props.isLoading === true ? 1 : 0)};
@@ -212,9 +213,8 @@ const ContentWrap = styled.div<{ isSelected: boolean }>`
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
   border-left: 10px solid white;
-  margin-left: 30px;
   transition: height 0.3s cubic-bezier(0.7, 0, 0.2, 1), top 0.3s ease-in-out;
   position: absolute;
   top: 37px;
@@ -224,12 +224,12 @@ const ContentWrap = styled.div<{ isSelected: boolean }>`
 const Content = styled.div`
   width: 80%;
   height: 463px;
-  margin-left: 60px;
+  margin-right: 60px;
   border-bottom: 3px solid white;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: ${"#00000055"};
+  background-color: #00000055;
   color: white;
 `;
 

@@ -1,7 +1,4 @@
-import { useEffect } from "react";
-import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { isLoadingAtom } from "../atoms";
 
 const LoadWrap = styled.div<{ isLoading: boolean | "loading" }>`
   width: 100vw;
@@ -34,18 +31,28 @@ const IconGroup = styled.div`
   align-items: center;
   margin-bottom: 10px;
 `;
+const OtherLoadAssets = styled.div`
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  opacity: 0;
+`;
 
 interface IMainLoading {
   isLoading: boolean | "loading";
-  icons: string[];
+  assets: string[];
 }
-function MainLoading({ isLoading, icons }: IMainLoading) {
+function MainLoading({ isLoading, assets }: IMainLoading) {
   return (
     <LoadWrap isLoading={isLoading}>
+      <OtherLoadAssets>
+        <img src={assets[0]} alt="asset" />
+        <img src={assets[1]} alt="asset" />
+      </OtherLoadAssets>
       <IconGroup>
-        <img src={icons[0]} alt="icon" />
-        <img src={icons[1]} alt="icon" />
-        <img src={icons[2]} alt="icon" />
+        <img src={assets[2]} alt="icon" />
+        <img src={assets[3]} alt="icon" />
+        <img src={assets[4]} alt="icon" />
       </IconGroup>
       Loading...
     </LoadWrap>
