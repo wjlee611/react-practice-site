@@ -50,7 +50,7 @@ const titleWrap_border = keyframes`
   from {
     width: 0%;
   } to {
-    width: 80%;
+    width: 83%;
   }
 `;
 const titleNo = keyframes`
@@ -105,7 +105,7 @@ const TitleGradBG = styled.div<{
   index: number;
   isLoading: boolean | "loading";
 }>`
-  width: ${(props) => (props.isLoading === true ? "80%" : "0%")};
+  width: ${(props) => (props.isLoading === true ? "83%" : "0%")};
   height: 40px;
   position: absolute;
   right: 50px;
@@ -118,7 +118,7 @@ const TitleGradBG = styled.div<{
   will-change: width;
 `;
 const TitleWrap = styled.div<{ index: number; isLoading: boolean | "loading" }>`
-  width: ${(props) => (props.isLoading === true ? "80%" : "0%")};
+  width: ${(props) => (props.isLoading === true ? "83%" : "0%")};
   height: 40px;
   border-bottom: 3px solid white;
   display: flex;
@@ -220,7 +220,7 @@ const ContentWrap = styled.div<{ isSelected: boolean }>`
   z-index: 1;
 `;
 const Content = styled.div`
-  width: 80%;
+  width: 83%;
   height: 463px;
   margin-right: 60px;
   border-bottom: 3px solid white;
