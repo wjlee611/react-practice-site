@@ -1,6 +1,4 @@
-import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { isLoadingAtom } from "../atoms";
 import styles from "../css/Home.module.css";
 
 const InfoWrap = styled.div<{ className: any; isLoading: boolean | "loading" }>`
@@ -73,10 +71,10 @@ const InfoWrap = styled.div<{ className: any; isLoading: boolean | "loading" }>`
 `;
 
 interface IMainInfo {
+  isLoading: boolean | "loading";
   assets: string[];
 }
-function MainInfo({ assets }: IMainInfo) {
-  const isLoading = useRecoilValue(isLoadingAtom);
+function MainInfo({ isLoading, assets }: IMainInfo) {
   return (
     <InfoWrap
       className={

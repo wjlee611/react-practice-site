@@ -154,7 +154,7 @@ function Home() {
           assets={[iconImage, bgImage, frontIcon, backIcon, fullIcon]}
         />
       )}
-      <MainInfo assets={[iconImage]} />
+      <MainInfo isLoading={isLoading} assets={[iconImage]} />
       <ListWrap>
         <BtnList>
           {isLoading === false
