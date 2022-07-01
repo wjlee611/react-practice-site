@@ -19,7 +19,7 @@ const ContentWrap = styled.div`
   }
 `;
 
-function MainContect() {
+function MainContact() {
   return (
     <ContentWrap className={styles.tab_open}>
       <span>E-mail: wjlee611@gmail.com</span>
@@ -28,4 +28,4 @@ function MainContect() {
   );
 }
 
-export default MainContect;
+export default MainContact;

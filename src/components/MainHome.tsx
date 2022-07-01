@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { mainTabSelected } from "../atoms";
 import styles from "../css/Home.module.css";
 
-const InfoWrap = styled.div<{
+const HomeWrap = styled.div<{
   className: any;
   isLoading: boolean | "loading";
   isSelected: boolean;
@@ -95,7 +95,7 @@ interface IHomeInfo {
 function MainHome({ isLoading, assets }: IHomeInfo) {
   const mainTabIdx = useRecoilValue(mainTabSelected);
   return (
-    <InfoWrap
+    <HomeWrap
       className={
         isLoading === true
           ? null
@@ -121,7 +121,7 @@ function MainHome({ isLoading, assets }: IHomeInfo) {
         <span>Dev.</span>
         <h2>Woong</h2>
       </Etc>
-    </InfoWrap>
+    </HomeWrap>
   );
 }
 

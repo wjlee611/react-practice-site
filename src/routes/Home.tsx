@@ -19,7 +19,7 @@ import MainLoading from "../components/MainLoading";
 import MainTabBtn from "../components/MainTabBtn";
 import MainHome from "../components/MainHome";
 import MainInfo from "../components/MainInfo";
-import MainContect from "../components/MainContect";
+import MainContact from "../components/MainContact";
 
 const Background = styled.div`
   background-image: linear-gradient(
@@ -223,7 +223,7 @@ function Home() {
               assets={[profileImage, githubIcon, blogIcon, youtubeIcon]}
             />
           ) : mainTabIdx === 2 ? (
-            <MainContect />
+            <MainContact />
           ) : null}
         </div>
       </ContentWrap>
@@ -235,7 +235,7 @@ function Home() {
           <MainTabBtn title={"Info"} index={1} />
         </li>
         <li>
-          <MainTabBtn title={"Contect"} index={2} />
+          <MainTabBtn title={"Contact"} index={2} />
         </li>
       </TabWrap>
     </Background>
