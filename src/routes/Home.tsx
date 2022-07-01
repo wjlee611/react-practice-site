@@ -120,6 +120,13 @@ const ContentWrap = styled.div<{ isSelected: boolean }>`
     }
   }
 `;
+const ContentTitle = styled.span`
+  position: absolute;
+  top: 55px;
+  left: 70px;
+  color: white;
+  font-size: 30px;
+`;
 const TabWrap = styled.ul`
   width: 500px;
   height: 100px;
@@ -209,6 +216,7 @@ function Home() {
         </div>
       </FrontGradBG>
       <ContentWrap isSelected={mainTabIdx !== 0}>
+        <ContentTitle>WoongJae Lee</ContentTitle>
         <div>
           {mainTabIdx === 1 ? (
             <MainInfo
