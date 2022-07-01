@@ -33,3 +33,4 @@ Contains the following contents.
   - react-query
   - react-helmet
   - react-transition-group
+  - recoil

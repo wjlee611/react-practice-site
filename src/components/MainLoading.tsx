@@ -48,6 +48,10 @@ function MainLoading({ isLoading, assets }: IMainLoading) {
       <OtherLoadAssets>
         <img src={assets[0]} alt="asset" />
         <img src={assets[1]} alt="asset" />
+        <img src={assets[5]} alt="asset" />
+        <img src={assets[6]} alt="asset" />
+        <img src={assets[7]} alt="asset" />
+        <img src={assets[8]} alt="asset" />
       </OtherLoadAssets>
       <IconGroup>
         <img src={assets[2]} alt="icon" />

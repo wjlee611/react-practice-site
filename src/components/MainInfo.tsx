@@ -1,127 +1,113 @@
-import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { mainTabSelected } from "../atoms";
 import styles from "../css/Home.module.css";
 
-const InfoWrap = styled.div<{
-  className: any;
-  isLoading: boolean | "loading";
-  isSelected: boolean;
-}>`
-  width: 500px;
-  height: 300px;
+const ContentWrap = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
   color: white;
-  z-index: 3;
-  position: absolute;
-  left: 0;
-  pointer-events: none;
-  will-change: ${(props) => (props.isLoading === true ? null : "transform")};
-  //logo
-  & > img:first-child {
-    position: absolute;
-    width: 150px;
-    height: 150px;
-    margin-bottom: 20px;
+  font-size: 20px;
+  margin-bottom: 200px;
+  & > img {
+    width: 300px;
+    height: 300px;
+    border-radius: 150px;
+    border: 2px solid white;
   }
 `;
-const Logo = styled.img<{ isSelected: boolean }>`
-  top: ${(props) => (props.isSelected ? "calc(250px - 50vh)" : 0)};
-  left: ${(props) => (props.isSelected ? "300px" : "100px")};
-  transform: scale(${(props) => (props.isSelected ? "50%" : "100%")});
-  transition: top 0.5s cubic-bezier(0.3, 0, 0.2, 1),
-    left 0.5s cubic-bezier(0.7, 0, 0.8, 1), transform 0.5s ease-in-out;
-  will-change: top, left, transfrom;
+const Introduce = styled.div`
+  width: 70%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  & * {
+    margin-top: 5px;
+  }
 `;
-const Etc = styled.div<{ isSelected: boolean }>`
-  opacity: ${(props) => (props.isSelected ? 0 : 1)};
-  transition: opacity 0.5s ease-out;
-  & > * {
-    position: absolute;
-    left: 100px;
-  }
-  //Accessing...
-  & > span:nth-child(1) {
-    font-size: 20px;
-    font-weight: 400;
-    margin-left: 30px;
-    top: 160px;
-  }
-  //Projects Archive
-  & > div:nth-child(2),
-  & > div:nth-child(3) {
+const Title = styled.div`
+  width: 90%;
+  border-bottom: 2px solid white;
+  margin-top: 30px;
+`;
+const Sites = styled.div`
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  & > a {
+    width: 100%;
     display: flex;
-    font-size: 40px;
-    font-weight: 700;
-    margin-left: 28px;
-    top: 180px;
-    & > h1:last-child {
-      font-weight: 400;
-      margin-left: 10px;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: filter 0.5s ease-out;
+    filter: invert(91%) sepia(99%) saturate(35%) hue-rotate(254deg)
+      brightness(108%) contrast(100%);
+    & > span {
+      color: black;
+      margin-left: 5px;
+    }
+    & > img {
+      width: 70px;
+      height: 70px;
+    }
+    &:hover {
+      filter: invert(77%) sepia(57%) saturate(1570%) hue-rotate(99deg)
+        brightness(101%) contrast(101%);
     }
   }
-  & > div:nth-child(3) {
-    top: 173px;
-    margin-left: 30px;
-    & > h1:not(:last-child) {
-      opacity: 0;
-    }
-    & > h1:last-child {
-      font-weight: 400;
-    }
-  }
-  //Dev.
-  & > span:nth-child(4) {
-    font-size: 15px;
-    font-weight: 400;
-    margin-left: 30px;
-    top: 220px;
-  }
-  //Woong
-  & > h2:nth-child(5) {
-    font-size: 25px;
-    font-weight: 700;
-    margin-left: 30px;
-    top: 235px;
-  }
+`;
+const SpecialThx = styled.div`
+  margin-top: 20px;
 `;
 
 interface IMainInfo {
-  isLoading: boolean | "loading";
   assets: string[];
 }
-function MainInfo({ isLoading, assets }: IMainInfo) {
-  const mainTabIdx = useRecoilValue(mainTabSelected);
+function MainInfo({ assets }: IMainInfo) {
   return (
-    <InfoWrap
-      className={
-        isLoading === true
-          ? null
-          : isLoading === "loading"
-          ? styles.infoWrap_loading
-          : styles.invisible
-      }
-      isLoading={isLoading}
-      isSelected={mainTabIdx !== 0}
-    >
-      <Logo src={assets[0]} alt="iconImage" isSelected={mainTabIdx !== 0} />
-      <Etc isSelected={mainTabIdx !== 0}>
-        <span>Accessing...</span>
-        <div>
-          <h1>Projects</h1>
-          <h1> Archive</h1>
-        </div>
-        <div>
-          <h1>Projects</h1>
-          <h1> Archive</h1>
-          <h1>_</h1>
-        </div>
-        <span>Dev.</span>
-        <h2>Woong</h2>
-      </Etc>
-    </InfoWrap>
+    <ContentWrap className={styles.tab_open}>
+      <img src={assets[0]} alt="profileImage" />
+      <Introduce>
+        <span>안녕하세요,</span>
+        <span>풀스택 개발자를 목표로 열심히 달리고 있는 웅이라고 합니다.</span>
+        <br />
+        <span>
+          취미로 영상편집, 간단한 개인 프로젝트 만들기, 게임을 하고 있으며,
+        </span>
+        <span>놀랍게도 닭다리보다 닭가슴살을 더 좋아합니다.</span>
+      </Introduce>
+      <Title>Sites</Title>
+      <Sites>
+        <a href="https://github.com/wjlee611" target="_blank" rel="noreferrer">
+          <img src={assets[1]} alt="github" />
+        </a>
+        <a href="https://with611.tistory.com/" target="_blank" rel="noreferrer">
+          <img src={assets[2]} alt="blog" />
+        </a>
+        <a
+          href="https://www.youtube.com/c/WITH611"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img src={assets[3]} alt="youtube" />
+        </a>
+      </Sites>
+      <Title>Source Code</Title>
+      <Sites>
+        <a
+          href="https://github.com/wjlee611/portfolio-site"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img src={assets[1]} alt="github" />
+          <span>@wjlee611/portfolio-site</span>
+        </a>
+      </Sites>
+      <Title>Special Thanks</Title>
+      <SpecialThx>지민이형 로고 제작해줘서 고마워~^^7</SpecialThx>
+    </ContentWrap>
   );
 }
 

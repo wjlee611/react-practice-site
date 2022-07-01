@@ -10,10 +10,16 @@ import iconImage from "../images/prts.png";
 import frontIcon from "../images/front.svg";
 import backIcon from "../images/back.svg";
 import fullIcon from "../images/full.svg";
+import profileImage from "../images/icon.jpg";
+import githubIcon from "../images/github.svg";
+import blogIcon from "../images/blog.svg";
+import youtubeIcon from "../images/youtube.svg";
 import { useEffect, useState } from "react";
 import MainLoading from "../components/MainLoading";
 import MainTabBtn from "../components/MainTabBtn";
+import MainHome from "../components/MainHome";
 import MainInfo from "../components/MainInfo";
+import MainContect from "../components/MainContect";
 
 const Background = styled.div`
   background-image: linear-gradient(
@@ -93,12 +99,26 @@ const ContentWrap = styled.div<{ isSelected: boolean }>`
   height: calc(100vh - 80px);
   background-color: rgba(0, 0, 0, 0.8);
   border-radius: 20px;
+  display: flex;
+  align-items: flex-end;
   position: absolute;
   left: 10px;
   bottom: -20px;
   z-index: 2;
   transform: translateY(${(props) => (props.isSelected ? "0" : "100vh")});
   transition: transform 0.5s cubic-bezier(0.4, 0, 0, 1);
+  & > div {
+    width: 100%;
+    height: calc(100% - 150px);
+    position: relative;
+    overflow: hidden;
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera*/
+    }
+  }
 `;
 const TabWrap = styled.ul`
   width: 500px;
@@ -151,10 +171,20 @@ function Home() {
       {isLoading === true ? null : (
         <MainLoading
           isLoading={isLoading}
-          assets={[iconImage, bgImage, frontIcon, backIcon, fullIcon]}
+          assets={[
+            iconImage,
+            bgImage,
+            frontIcon,
+            backIcon,
+            fullIcon,
+            profileImage,
+            githubIcon,
+            blogIcon,
+            youtubeIcon,
+          ]}
         />
       )}
-      <MainInfo isLoading={isLoading} assets={[iconImage]} />
+      <MainHome isLoading={isLoading} assets={[iconImage]} />
       <ListWrap>
         <BtnList>
           {isLoading === false
@@ -178,7 +208,17 @@ function Home() {
           <span>PROJECTS ARCHIVE</span>
         </div>
       </FrontGradBG>
-      <ContentWrap isSelected={mainTabIdx !== 0}></ContentWrap>
+      <ContentWrap isSelected={mainTabIdx !== 0}>
+        <div>
+          {mainTabIdx === 1 ? (
+            <MainInfo
+              assets={[profileImage, githubIcon, blogIcon, youtubeIcon]}
+            />
+          ) : mainTabIdx === 2 ? (
+            <MainContect />
+          ) : null}
+        </div>
+      </ContentWrap>
       <TabWrap>
         <li>
           <MainTabBtn title={"Home"} index={0} />

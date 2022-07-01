@@ -95,3 +95,8 @@
   opacity: 0;
   animation: to_visible 1.5s linear forwards;
 }
+
+.tab_open {
+  opacity: 0;
+  animation: to_visible 0.5s linear forwards;
+}
