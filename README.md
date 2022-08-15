@@ -1,6 +1,6 @@
-# Woong's Protfolio
+# Woong's React-practice-site
 
-This project was created to explain myself as developer.
+This project was created to practice react
 
 ## Contents
 
