@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/react-practice-site/static/css/main.174627c8.css",
+    "main.js": "/react-practice-site/static/js/main.8f994578.js",
+    "static/media/bg.png": "/react-practice-site/static/media/bg.7baa0a988ac7861e26fa.png",
+    "static/media/prts.png": "/react-practice-site/static/media/prts.c69d22a901f77401b29c.png",
+    "static/media/icon.jpg": "/react-practice-site/static/media/icon.7a1620b0266e1b3afcd0.jpg",
+    "static/media/full.svg": "/react-practice-site/static/media/full.c8584a7c43c965fe0463a2e44218be4a.svg",
+    "index.html": "/react-practice-site/index.html",
+    "static/media/github.svg": "/react-practice-site/static/media/github.833b63e28cadf07403bc81451d30b858.svg",
+    "static/media/blog.svg": "/react-practice-site/static/media/blog.d8adfbd670c975416fa2a43be75719a2.svg",
+    "static/media/front.svg": "/react-practice-site/static/media/front.2df9201d427d6f6cfeddd1f26b5aad7a.svg",
+    "static/media/back.svg": "/react-practice-site/static/media/back.51a7d7478028bea9551c278aacdb00a5.svg",
+    "static/media/youtube.svg": "/react-practice-site/static/media/youtube.87350b41a36870581ed6bbca31d713b0.svg",
+    "main.174627c8.css.map": "/react-practice-site/static/css/main.174627c8.css.map",
+    "main.8f994578.js.map": "/react-practice-site/static/js/main.8f994578.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.174627c8.css",
+    "static/js/main.8f994578.js"
+  ]
+}
